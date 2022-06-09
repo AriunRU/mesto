@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel=" stylesheet" href="./pages/index.css">
+    <title>Mesto</title>
+</head>
+
+<body class="page">
+    <header class="header">
+        <img class="header__logo" src="./image/header/image.svg" alt="Логотип">
+    </header>
+
+    <main class="content">
+        <section class="profile">
+            <img class="profile__image" src="./image/profile/__image.jpg" alt="фото Кусто">
+            <div class="profile__info">
+                <h1 class="profile__name">Жак-Ив Кусто</h1>
+                <p class="profile__text">Исследователь океана</p>
+                <button type="button" class="profile__edit-button"></button>
+            </div>
+            <button type="button" class="profile__add-button">
+            </button>
+        </section>
+
+        <section class="elements">
+            <ul class="elements__item">
+                <li class="element">
+                    <img class="element__image" src="./image/elements/Мой помощник.jpg"
+                        alt="Мой помощник">
+                    <div class="element__description">
+                        <h2 class="element__title">Помощник</h2>
+                        <button class="element__like" type="button">нравится</button>
+                    </div>
+                </li>
+                <li class="element">
+                    <img class="element__image" src="./image/elements/Немного интересного.jpg"
+                        alt="Немного интересного">
+                    <div class="element__description">
+                        <h2 class="element__title">Интересное</h2>
+                        <button class="element__like">нравится</button>
+                    </div>
+                </li>
+                <li class="element">
+                    <img class="element__image" src="./image/elements/Первая ошибка.jpg"
+                        alt="Первая ошибка">
+                    <div class="element__description">
+                        <h2 class="element__title">Ошибка</h2>
+                        <button class="element__like">нравится</button>
+                    </div>
+                </li>
+                <li class="element">
+                    <img class="element__image" src="./image/elements/ТЗ.jpg"
+                        alt="ТЗ">
+                    <div class="element__description">
+                        <h2 class="element__title">ТЗ</h2>
+                        <button class="element__like">нравится</button>
+                    </div>
+                </li>
+                <li class="element">
+                    <img class="element__image" src="./image/elements/Ужас.jpg"
+                        alt="Ужас">
+                    <div class="element__description">
+                        <h2 class="element__title">Ужас</h2>
+                        <button class="element__like">нравится</button>
+                    </div>
+                </li>
+                <li class="element">
+                    <img class="element__image" src="./image/elements/Шутки.jpg"
+                        alt="Шутка">
+                    <div class="element__description">
+                        <h2 class="element__title">Шутка</h2>
+                        <button class="element__like">нравится</button>
+                    </div>
+                </li>
+            </ul>
+        </section>
+
+    </main>
+    <footer class="footer">
+        <p class="footer__copyright">&copy; 2022. Kirill Sidorkov</p>
+    </footer>
+    <div class="popup">
+        <div class="popup__container">
+            <button class="popup__closed" type="button" aria-label="Закрыть"></button>
+            <h2 class="popup__title">Редактировать профиль</h2>
+            <form class="popup__form" name="form" method="post" action="#">
+                <input class="popup__input popup__input_name" name="user" required type="text" placeholder="Имя">
+                <input class="popup__input popup__input_profession" name="job" required type="text" placeholder="Профессия">
+                <button class="popup__submit-btn" type="submit">Сохранить</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="./scripts/script.js"></script>
+</body>
+
+</html>
