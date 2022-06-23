@@ -1,19 +1,16 @@
 .element__like {
-    font-size: 0;
-    background-image: url(../../../image/elements/__like.svg);
-    width: 22px;
-    min-height: 19px;
-    border: none;
-    background-color: white;
-    cursor: pointer;
-    transition: 0.2s ease;
-    padding: 0;
-  }
-  
-  .element__like:hover {
-    opacity: 0.5;
-  }
-  
-  .element__like:active {
-    background-image: url(../../../image/elements/__like-active.svg);
-  }
+  min-height: 19px;
+  min-width: 22px;
+  background: transparent url(../../../image/elements/__like.svg);
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center;
+  cursor: pointer;
+  border: none;
+  margin: 0;
+  padding: 0;
+}
+
+.element__like:hover {
+  opacity: 0.6;
+}

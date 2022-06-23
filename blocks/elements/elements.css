@@ -1,0 +1,11 @@
+/* Отступ после карточек */
+.elements { 
+  max-width: 100%;
+  padding: 0 0 66px;
+}
+
+@media screen and (max-width: 400px) {
+  .elements {
+      padding: 0 0 48px;
+  }
+}

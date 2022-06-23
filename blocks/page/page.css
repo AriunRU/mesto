@@ -1,11 +1,14 @@
 .page {
-    min-width: 320px;
-    max-width: 882px;
-    margin: 0 auto;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    background-color: #000;
-    font-family: 'Inter', Arial, sans-serif;
-    position: relative;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  -webkit-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
+  -moz-text-size-adjust: 100%;
+  text-rendering: optimizeLegibility;
+  margin: 0;
+  padding: 0;
+  background-color: #000;
+  min-height: 100vh;
+  font-family: "Inter", "Arial", sans-serif;
+  color: #FFF;
 }
