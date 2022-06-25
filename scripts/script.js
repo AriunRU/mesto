@@ -1,12 +1,12 @@
-const popup = document.querySelector('.popup'),
-popupToggle = document.querySelector('.profile__edit-button'),
-popupClose = document.querySelector('.popup__closed'),
-popupName = document.querySelector('.popup__input_name'),
-popupProfession = document.querySelector('.popup__input_profession'),
-popupSubmit = document.querySelector('.popup__submit-btn');
+const popup = document.querySelector('.popup');
+const popupToggle = document.querySelector('.profile__edit-button');
+const popupClose = document.querySelector('.popup__closed');
+const popupName = document.querySelector('.popup__input_name');
+const popupProfession = document.querySelector('.popup__input_profession');
+const popupSubmit = document.querySelector('.popup__submit-btn');
 
-const popupTitle = document.querySelector('.profile__name'),
-popupSubtitle = document.querySelector('.profile__text');
+const popupTitle = document.querySelector('.profile__name');
+const popupSubtitle = document.querySelector('.profile__text');
 //открыть
 function openPopup() {
     popup.classList.add('popup_opened');

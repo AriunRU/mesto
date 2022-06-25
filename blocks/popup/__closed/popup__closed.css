@@ -10,8 +10,6 @@
     top: -40px;
     right: -40px;
     background-size: cover;
-
-
 }
 
 .popup__closed:hover {
@@ -19,7 +17,7 @@
     cursor: pointer;
 }
 
-@media screen and (max-width: 767px) {
+@media screen and (max-width: 530px) {
     .popup__closed {
         width: 20px;
         height: 20px;
