@@ -17,7 +17,7 @@
     cursor: pointer;
 }
 
-@media screen and (max-width: 530px) {
+@media screen and (max-width: 650px) {
     .popup__closed {
         width: 20px;
         height: 20px;
