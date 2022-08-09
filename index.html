@@ -26,7 +26,7 @@
         </section>
 
         <section class="elements">
-            <ul class="elements__item">
+            <ul class="elements__items">
                 <li class="element">
                     <img class="element__image" src="./image/elements/Помощник.jpg" alt="Помощник">
                     <div class="element__description">
@@ -80,11 +80,11 @@
 
     <div class="popup">
         <div class="popup__container">
-            <button class="popup__closed" type="button" aria-label="Закрыть"></button>
+            <button class="popup__close" type="button" aria-label="Закрыть"></button>
             <h2 class="popup__title">Редактировать профиль</h2>
             <form class="popup__form" name="form" method="post" action="#">
-                <input class="popup__input popup__input_name" name="user" required type="text" placeholder="Имя">
-                <input class="popup__input popup__input_profession" name="job" required type="text" placeholder="Профессия">
+                <input class="popup__input popup__input_type_name" name="user" required type="text" placeholder="Имя">
+                <input class="popup__input popup__input_type_profession" name="job" required type="text" placeholder="Профессия">
                 <button class="popup__save" type="submit" aria-label="Сохранить">Сохранить</button>
             </form>
         </div>
