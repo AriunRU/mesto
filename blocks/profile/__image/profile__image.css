@@ -1,5 +1,5 @@
 .profile__image {
-  border-radius: 50%;
+    border-radius: 50%;
     background: #000;
     object-fit: cover;
     background-position: center;
@@ -7,8 +7,8 @@
     height: 120px;
 }
 
-@media screen and (max-width: 600px) {
-  .profile__image {
-    align-self: center;
-  }
+@media screen and (max-width: 900px) {
+    .profile__image {
+        align-self: center;
+    }
 }

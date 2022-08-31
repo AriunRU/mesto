@@ -1,23 +1,20 @@
 .popup__close {
+    position: absolute;
     width: 32px;
     height: 32px;
-    padding: 0;
-    background-image: url('../../../image/edit-form/close-icon.svg');
-    background-color: transparent;
-    border: none;
-    background-position: 50% 50%;
-    position: absolute;
     top: -40px;
     right: -40px;
-    background-size: cover;
-}
-
-.popup__close:hover {
-    opacity: 0.6;
+    opacity: 1;
+    background: transparent url(../../../image/edit-form/close-icon.svg) center no-repeat;
+    border: none;
     cursor: pointer;
 }
 
-@media screen and (max-width: 650px) {
+.popup__close:hover {
+    opacity: .6;
+}
+
+@media screen and (max-width: 768px) {
     .popup__close {
         width: 20px;
         height: 20px;

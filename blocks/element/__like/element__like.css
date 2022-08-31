@@ -1,16 +1,16 @@
 .element__like {
-  min-height: 19px;
-  min-width: 22px;
-  background: transparent url(../../../image/elements/__like.svg);
-  background-repeat: no-repeat;
-  background-size: contain;
-  background-position: center;
-  cursor: pointer;
-  border: none;
-  margin: 0;
-  padding: 0;
+    min-height: 19px;
+    min-width: 22px;
+    background: transparent url(../../../image/elements/__like.svg);
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+    cursor: pointer;
+    border: none;
+    margin: 0;
+    padding: 0;
 }
 
 .element__like:hover {
-  opacity: 0.6;
+    opacity: 0.6;
 }

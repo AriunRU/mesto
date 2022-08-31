@@ -8,14 +8,13 @@
     font-weight: 400;
     font-size: 14px;
     line-height: 17px;
-    outline: none;
 }
 
 .popup__input:last-child {
     margin: 0;
 }
 
-@media screen and (max-width: 650px) {
+@media screen and (max-width: 768px) {
     .popup__input {
         width: 238px;
     }
