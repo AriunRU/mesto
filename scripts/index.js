@@ -1,12 +1,12 @@
-//переменные profile
+
 const buttonEdit = document.querySelector('.profile__edit-button');
 const buttonAdd = document.querySelector('.profile__add-button');
 const username = document.querySelector('.profile__title');
 const job = document.querySelector('.profile__description');
-//переменные elements
+
 const sectionElements = document.querySelector('.elements');
 const listElement = sectionElements.querySelector('.element');
-//переменные popup
+
 const buttonsClose = document.querySelectorAll('.popup__close');
 const popupAvatar = document.querySelector('.popup_type_avatar');
 const userNameInput = document.querySelector('.popup__input_type_username');
@@ -22,7 +22,7 @@ const popupFormAdd = document.querySelector('.popup__form_add');
 
 
 
-//общая функция открытия попапа
+
 function openPopup(popup) {
     popup.classList.add('popup_opened');
     document.addEventListener('keydown', handleEscape);
@@ -39,7 +39,7 @@ function addPopupValue() {
     jobInput.value = job.textContent;
 }
 
-//общая функция закрытия попапа
+
 function closePopup(popup) {
     popup.classList.remove('popup_opened');
     document.removeEventListener('keydown', handleEscape);
@@ -61,7 +61,7 @@ buttonsClose.forEach((item) => {
 });
 
 
-//Добавление карточек на страницу
+
 function renderList(data) {
     data.forEach(item => renderCard(item));
 }
@@ -93,18 +93,14 @@ function createCard(data) {
 };
 renderList(initialCards);
 
-
-//функция удаления карточки
 function deleteCard(e) {
     e.target.closest('.element__item').remove();
 };
 
-//функция активного лайка
 function elementLikeActive(e) {
     e.target.classList.toggle('element__like_active');
 };
 
-//функция открытия попапа изображения
 function openPopupImage(e) {
     openPopup(popupImageZoom);
     popupImage.src = `${e.target.src}`;
@@ -112,14 +108,12 @@ function openPopupImage(e) {
     popupCaption.textContent = `${e.target.alt}`;
 }
 
-//функция открытия попапа добавления карточки
 function openPopupAddElement() {
     openPopup(popupAddElement);
     titleInput.value = '';
     linkInput.value = '';
 }
 
-//функция добавления карточки на страницу
 function addElement(e) {
     e.preventDefault();
     let name = titleInput.value;
@@ -132,7 +126,6 @@ buttonAdd.addEventListener('click', openPopupAddElement);
 popupFormAdd.addEventListener('submit', addElement);
 
 
-//закрытие попапа через Esc
 function handleEscape(e) {
     if(e.key === 'Escape') {
         const openedPopup = document.querySelector('.popup_opened');
@@ -140,7 +133,6 @@ function handleEscape(e) {
     }
 };
 
-//закрытие попапа через Esc
 function handleOverlay(e) {
         const openedPopup = document.querySelector('.popup_opened');
         if(e.target === openedPopup) {
