@@ -39,19 +39,10 @@
             <div class="popup__content">
                 <h2 class="popup__title">Редактировать профиль</h2>
                 <form class="popup__form popup__form_avatar" name="popupForm" novalidate>
-                    <fieldset class="popup__form_avatar-data">
-                        <label class="popup__form_field">
-                            <input id="username-input" class="popup__input popup__input_type_username" minlength="2"
-                                maxlength="40" type="text" placeholder="Жак-Ив-Кусто" name="form__name" required>
-                            <span class="username-input-error popup__input_type_error"></span>
-                        </label>
-                        <label class="popup__form_field">
-                            <input id="text-input" class="popup__input popup__input_type_job" minlength="2"
-                                maxlength="200" type="text" placeholder="Исследователь  океана" name="form__job"
-                                required>
-                            <span class="text-input-error popup__input_type_error"></span>
-                        </label>
-                    </fieldset>
+                    <input id="username-input" class="popup__input popup__input_type_username" minlength="2"
+                        maxlength="40" type="text" placeholder="Жак-Ив-Кусто" name="form__name" required>
+                    <input id="text-input" class="popup__input popup__input_type_job" minlength="2" maxlength="200"
+                        type="text" placeholder="Исследователь  океана" name="form__job" required>
                     <button class="popup__button" type="submit" value="save">Сохранить</button>
                 </form>
             </div>
@@ -64,18 +55,10 @@
             <div class="popup__content">
                 <h2 class="popup__title">Новое место</h2>
                 <form class="popup__form popup__form_add" name="popupForm" novalidate>
-                    <label class="popup__form_field">
-                        Вы пропустили это поле.
-                        <input id="name-input" type="text" placeholder="Название" name="name"
-                            class="popup__input popup__input_type_title" minlength="2" maxlength="30" required>
-                        <span class="name-input-error popup__input_type_error"></span>
-                    </label>
-                    <label class="popup__form_field">
-                        Введите адрес сайта.
-                        <input id="url-input" type="url" placeholder="Ссылка на картинку" name="link"
-                            class="popup__input popup__input_type_link" required>
-                        <span class="url-input-error popup__input_type_error"></span>
-                    </label>
+                    <input id="name-input" type="text" placeholder="Название" name="name"
+                        class="popup__input popup__input_type_title" minlength="2" maxlength="30" required>
+                    <input id="url-input" type="url" placeholder="Ссылка на картинку" name="link"
+                        class="popup__input popup__input_type_link" required>
                     <button type="submit" class="popup__button">Создать</button>
                 </form>
             </div>
