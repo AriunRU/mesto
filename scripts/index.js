@@ -11,16 +11,15 @@ const listElement = MassElements.querySelector(".element"); //Один эл. м�
 //Создание переменных из попапа
 const nameInput = document.querySelector(".popup__input_name"); // строка с изменением имени
 const jobInput = document.querySelector(".popup__input_job"); // строка с изменением проффессии
-const editSample = document.querySelector(".popup__edit_sample"); // Измениние профиля
+const editSample = document.querySelector(".popup__edit-sample"); // Измениние профиля
 const titleInput = document.querySelector(".popup__input_title"); // строка с внесением названия
 const linkInput = document.querySelector(".popup__input_link"); // строка с внесением ссылки на картинку
-
 const popupImage = document.querySelector(".popup__image"); // секция с увеличением картинки
 const popupCaption = document.querySelector(".popup__caption"); // название под фото при увеличении
 const popupImgfull = document.querySelector(".popup_image_full"); // увеличение фото
-const popupAddsubject = document.querySelector(".popup_add_subject"); // добавление элемента
+const popupAddsubject = document.querySelector(".popup_add"); // добавление элемента
 const popupProfile = document.querySelector(".popup_edit"); // попап с инфой
-const popupFormAdd = document.querySelector(".popup__form_add"); // строка с внесением ссылки на картинку
+const popupFormAdd = document.querySelector(".popup__form-add"); // строка с внесением ссылки на картинку
 
 function renderList(info) { // Проверка массива
   info.forEach((item) => renderCard(item));
