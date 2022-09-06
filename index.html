@@ -17,9 +17,9 @@
         <section class="profile">
             <img class="profile__image" src="./image/profile/__image.jpg" alt="Фото Жак-Ив-Кусто">
             <div class="profile__info">
-                <h1 class="profile__title">Жак-Ив Кусто</h1>
+                <h1 class="profile__name">Жак-Ив Кусто</h1>
                 <button type="button" class="profile__edit-button"></button>
-                <p class="profile__description">Исследователь океана</p>
+                <p class="profile__job">Исследователь океана</p>
             </div>
             <button type="button" class="profile__add-button"></button>
         </section>
@@ -36,7 +36,7 @@
     <section class="popup popup_edit">
         <div class="popup__container">
             <button class="popup__close" type="button"></button>
-            <div class="popup__content">
+            <div class="popup__keep">
                 <h2 class="popup__title">Редактировать профиль</h2>
                 <form class="popup__form popup__edit_form" name="popupForm" novalidate>
                     <input class="popup__input popup__input_name" type="text" placeholder="Жак-Ив-Кусто" minlength="2" maxlength="40" required>
@@ -51,7 +51,7 @@
     <section class="popup popup_add_subject">
         <div class="popup__container">
             <button class="popup__close" type="button"></button>
-            <div class="popup__content">
+            <div class="popup__keep">
                 <h2 class="popup__title">Новое место</h2>
                 <form class="popup__form popup__form_add" name="popupForm" novalidate>
                     <input type="text" placeholder="Название" class="popup__input popup__input_title" minlength="2" maxlength="30" required>
@@ -63,7 +63,7 @@
     </section>
 
     <section class="popup popup_image_full">
-        <div class="popup__box">
+        <div class="popup__case">
             <button class="popup__close" type="button"></button>
             <img class="popup__image" src="#" alt="Картинка">
             <h2 class="popup__caption"></h2>

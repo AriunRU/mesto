@@ -3,15 +3,15 @@ const btnEdit = document.querySelector(".profile__edit-button"); // кнопка
 const btnAdd = document.querySelector(".profile__add-button"); // кнопка плюсик
 const buttonsClose = document.querySelectorAll(".popup__close"); //Кнопка крестик
 
-const username = document.querySelector(".profile__title"); // Имя
-const job = document.querySelector(".profile__description"); // Проффессия
+const name = document.querySelector(".profile__name"); // Имя
+const job = document.querySelector(".profile__job"); // Проффессия
 //Создание переменных из карточек
 const MassElements = document.querySelector(".elements"); // Массив
 const listElement = MassElements.querySelector(".element"); //Один эл. масс.
 //Создание переменных из попапа
-const userNameInput = document.querySelector(".popup__input_name"); // строка с изменением имени
+const nameInput = document.querySelector(".popup__input_name"); // строка с изменением имени
 const jobInput = document.querySelector(".popup__input_job"); // строка с изменением проффессии
-const editAvatar = document.querySelector(".popup__edit_form"); // Измениние профиля
+const editForm = document.querySelector(".popup__edit_form"); // Измениние профиля
 const titleInput = document.querySelector(".popup__input_title"); // строка с внесением названия
 const linkInput = document.querySelector(".popup__input_link"); // строка с внесением ссылки на картинку
 
@@ -64,7 +64,7 @@ function openPopupProfile(evt) {
 }
 
 function addPopupValue() {
-  userNameInput.value = username.textContent;
+  nameInput.value = name.textContent;
   jobInput.value = job.textContent;
 }
 
@@ -75,13 +75,13 @@ function closePopup(popup) { // Закрытие попапа
 }
 function handleSavePopup(evt) { // Сохранение новой записи с закрытием
   evt.preventDefault();
-  username.textContent = userNameInput.value;
+  name.textContent = nameInput.value;
   job.textContent = jobInput.value;
   closePopup(popupProfile);
 }
 
 btnEdit.addEventListener("click", openPopupProfile); // включение кнопки для редактирование
-editAvatar.addEventListener("submit", handleSavePopup); // редактирование профиля
+editForm.addEventListener("submit", handleSavePopup); // редактирование профиля
 
 buttonsClose.forEach((item) => { // кнопка закрытия (крестик)
   item.addEventListener("click", (evt) =>
