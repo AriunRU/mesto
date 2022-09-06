@@ -33,13 +33,13 @@
         <p class="footer__copyright">&copy; 2022. Kirill Sidorkov</p>
     </footer>
 
-    <section class="popup popup_edit-profile">
+    <section class="popup popup_edit-person">
         <div class="popup__container">
             <button class="popup__close" type="button"></button>
             <div class="popup__content">
                 <h2 class="popup__title">Редактировать профиль</h2>
-                <form class="popup__form popup__edit_avatar" name="popupForm" novalidate>
-                    <input class="popup__input popup__input_username" type="text" placeholder="Жак-Ив-Кусто" required>
+                <form class="popup__form popup__edit_person" name="popupForm" novalidate>
+                    <input class="popup__input popup__input_name" type="text" placeholder="Жак-Ив-Кусто" required>
                     <input class="popup__input popup__input_job" type="text" placeholder="Исследователь океана"
                         required>
                     <button class="popup__button" type="submit" value="save">Сохранить</button>
@@ -48,7 +48,7 @@
         </div>
     </section>
 
-    <section class="popup popup_add_element">
+    <section class="popup popup_add_subject">
         <div class="popup__container">
             <button class="popup__close" type="button"></button>
             <div class="popup__content">
@@ -62,7 +62,7 @@
         </div>
     </section>
 
-    <section class="popup popup_image_zoom">
+    <section class="popup popup_image_full">
         <div class="popup__box">
             <button class="popup__close" type="button"></button>
             <img class="popup__image" src="#" alt="Картинка">
@@ -70,14 +70,14 @@
         </div>
     </section>
 
-    <template class="element-template">
+    <template class="element-sample">
         <li class="element__item">
-            <img class="element__image">
+            <img class="element__img">
             <div class="element__group">
                 <h3 class="element__title"></h3>
-                <button class="element__like" type="button"></button>
+                <button class="element__heart" type="button"></button>
             </div>
-            <button class="element__delete" type="button"></button>
+            <button class="element__remove" type="button"></button>
         </li>
     </template>
     <script src="./scripts/cards.js"></script>

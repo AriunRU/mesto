@@ -1,4 +1,4 @@
-.element__like {
+.element__heart {
     min-height: 19px;
     min-width: 22px;
     background: transparent url(../../../image/elements/__like.svg);
@@ -11,6 +11,6 @@
     padding: 0;
 }
 
-.element__like:hover {
+.element__heart:hover {
     opacity: 0.6;
 }

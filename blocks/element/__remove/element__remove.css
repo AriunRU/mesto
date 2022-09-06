@@ -1,4 +1,4 @@
-.element__delete {
+.element__remove {
     background-image: url(../../../image/elements/__delete.svg);
     background-repeat: no-repeat;
     background-color: transparent;
@@ -12,10 +12,10 @@
     cursor: pointer;
 }
 
-.element__delete:hover {
+.element__remove:hover {
     opacity: 0.6;
 }
 
-.element__delete_active {
+.element__remove_active {
     display: none;
 }
