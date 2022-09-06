@@ -11,7 +11,7 @@ const listElement = MassElements.querySelector(".element"); //Один эл. м�
 //Создание переменных из попапа
 const nameInput = document.querySelector(".popup__input_name"); // строка с изменением имени
 const jobInput = document.querySelector(".popup__input_job"); // строка с изменением проффессии
-const editForm = document.querySelector(".popup__edit_form"); // Измениние профиля
+const editSample = document.querySelector(".popup__edit_sample"); // Измениние профиля
 const titleInput = document.querySelector(".popup__input_title"); // строка с внесением названия
 const linkInput = document.querySelector(".popup__input_link"); // строка с внесением ссылки на картинку
 
@@ -81,7 +81,7 @@ function handleSavePopup(evt) { // Сохранение новой записи 
 }
 
 btnEdit.addEventListener("click", openPopupProfile); // включение кнопки для редактирование
-editForm.addEventListener("submit", handleSavePopup); // редактирование профиля
+editSample.addEventListener("submit", handleSavePopup); // редактирование профиля
 
 buttonsClose.forEach((item) => { // кнопка закрытия (крестик)
   item.addEventListener("click", (evt) =>
