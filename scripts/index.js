@@ -10,11 +10,11 @@ const massElements = document.querySelector(".elements"); // Массив
 const elemTemp = document.querySelector(".element-sample").content;
 const listElement = massElements.querySelector(".element"); //Один эл. масс.
 //Создание переменных из попапа
-const nameInput = document.querySelector(".popup__type_name"); // строка с изменением имени
-const jobInput = document.querySelector(".popup__type_job"); // строка с изменением проффессии
+const nameInput = document.querySelector("#popup__type_name"); // строка с изменением имени
+const jobInput = document.querySelector("#popup__type_job"); // строка с изменением проффессии
 const editSample = document.querySelector("#popup__edit_sample"); // Измениние профиля
-const titleInput = document.querySelector(".popup__type_title"); // строка с внесением названия
-const linkInput = document.querySelector(".popup__type_link"); // строка с внесением ссылки на картинку
+const titleInput = document.querySelector("#popup__type_title"); // строка с внесением названия
+const linkInput = document.querySelector("#popup__type_link"); // строка с внесением ссылки на картинку
 const popupImage = document.querySelector(".popup__image"); // секция с увеличением картинки
 const popupCaption = document.querySelector(".popup__caption"); // название под фото при увеличении
 const popupImgFull = document.querySelector(".popup_image_full"); // увеличение фото
