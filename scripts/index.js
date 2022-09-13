@@ -1,9 +1,12 @@
 //Создание переменных из профиля
 const btnEdit = document.querySelector(".profile__edit-button"); // кнопка карандашик
 const btnAdd = document.querySelector(".profile__add-button"); // кнопка плюсик
-const buttonsClose = document.querySelectorAll(".popup__close"); //Кнопка крестик
+const buttonClose = document.querySelector(".popup__close"); //Кнопка крестик
+const buttonCloseEdit = document.querySelector("#popup__close_edit");
+const buttonCloseAdd = document.querySelector("#popup__close_add");
+const buttonCloseImg = document.querySelector("#popup__close_img");
 
-const name = document.querySelector(".profile__name"); // Имя
+const username = document.querySelector(".profile__name"); // Имя
 const job = document.querySelector(".profile__job"); // Проффессия
 //Создание переменных из карточек
 const massElements = document.querySelector(".elements"); // Массив
@@ -12,15 +15,16 @@ const listElement = massElements.querySelector(".element"); //Один эл. м�
 //Создание переменных из попапа
 const nameInput = document.querySelector("#popup__type_name"); // строка с изменением имени
 const jobInput = document.querySelector("#popup__type_job"); // строка с изменением проффессии
-const editSample = document.querySelector("#popup__edit_sample"); // Измениние профиля
 const titleInput = document.querySelector("#popup__type_title"); // строка с внесением названия
 const linkInput = document.querySelector("#popup__type_link"); // строка с внесением ссылки на картинку
 const popupImage = document.querySelector(".popup__image"); // секция с увеличением картинки
 const popupCaption = document.querySelector(".popup__caption"); // название под фото при увеличении
-const popupImgFull = document.querySelector(".popup_image_full"); // увеличение фото
-const popupAddSubject = document.querySelector(".popup_add_element"); // добавление элемента
-const popupProfile = document.querySelector(".popup_edit_form"); // попап с инфой
+const popupImg = document.querySelector(".popup_image"); // увеличение фото
+const popupAddSubject = document.querySelector(".popup_type_add"); // попап с добавлением элемента
+const popupProfile = document.querySelector(".popup_type_edit"); // попап с инфой
 const popupFormAdd = document.querySelector("#popup__form_add"); // строка с внесением ссылки на картинку
+const editSample = document.querySelector("#popup__form_edit"); // Измениние профиля
+
 
 function renderList(info) { // Проверка массива
   info.forEach((item) => renderCard(item));
@@ -55,6 +59,7 @@ renderList(initialCards);
 function openPopup(popup) { // Функция открытия попапа
   popup.classList.add("popup_opened");
   document.addEventListener("keydown", closeOnEscape);
+  popup.addEventListener('click', clickOverlayPopup);
 }
 
 function openPopupProfile(evt) {
@@ -63,29 +68,16 @@ function openPopupProfile(evt) {
 }
 
 function addPopupValue() {
-  nameInput.value = name.textContent;
+  nameInput.value = username.textContent;
   jobInput.value = job.textContent;
 }
 
-function closePopup(popup) { // Закрытие попапа
-  popup.classList.remove("popup_opened");
-  document.removeEventListener("keydown", closeOnEscape);
-  document.removeEventListener("mousedown", closeOnOverlay);
-}
 function handleSavePopup(evt) { // Сохранение новой записи с закрытием
   evt.preventDefault();
-  name.textContent = nameInput.value;
+  username.textContent = nameInput.value;
   job.textContent = jobInput.value;
   closePopup(popupProfile);
 }
-
-btnEdit.addEventListener("click", openPopupProfile); // включение кнопки для редактирование
-editSample.addEventListener("submit", handleSavePopup); // редактирование профиля
-
-buttonsClose.forEach((item) => {
-  item.addEventListener('click', (item) =>
-  item.target.closest('.popup').classList.remove('popup_opened')); // Не понимаю насчет универсальной функции закрытия help
-}); 
 
 function deleteCard(evt) { // Функция удаления карточки
   evt.target.closest(".element__item").remove();
@@ -96,7 +88,7 @@ function elementLikeActive(evt) { // Функция Лайка карточки
 }
 
 function openPopupImage(evt) { // Функция увеличения карточки
-  openPopup(popupImgFull);
+  openPopup(popupImg);
   popupImage.src = `${evt.target.src}`;
   popupCaption.textContent = `${evt.target.alt}`;
   popupImage.alt = `${evt.target.alt}`;
@@ -104,7 +96,7 @@ function openPopupImage(evt) { // Функция увеличения карто
 
 function openPopupAddSubject() {
   openPopup(popupAddSubject);
-  titleInput.value = ""; //.reset() не помогает
+  titleInput.value = "";
   linkInput.value = "";
 }
 
@@ -116,12 +108,40 @@ function addElement(evt) {
   closePopup(popupAddSubject);
 }
 
-btnAdd.addEventListener("click", openPopupAddSubject);
-popupFormAdd.addEventListener("submit", addElement);
+function closePopup(popup) { // Закрытие попапа
+  popup.classList.remove("popup_opened");
+  document.removeEventListener("keydown", closeOnEscape);
+  popup.removeEventListener('click', clickOverlayPopup);
+}
 
-function closeOnEscape(evt) { // закрытие через esc
-  if (evt.key === "Escape") {
-    const openedPopup = document.querySelector(".popup_opened");
-    closePopup(openedPopup);
+function clickOverlayPopup(evt) { //закрытие попапа через оверлей
+  if (evt.target.closest('.popup')) {
+      closePopup(evt.target);
   }
 }
+
+function closeOnEscape(evt) { // закрытие через esc
+  let popup;
+  if (evt.key === "Escape") {
+    popup = document.querySelector(".popup_opened");
+    closePopup(popup);
+  }
+}
+
+buttonCloseEdit.addEventListener('click', function () {
+  closePopup(popupProfile);
+});
+
+buttonCloseAdd.addEventListener('click', function () {
+  closePopup(popupAddSubject);
+});
+
+buttonCloseImg.addEventListener('click', function () {
+  closePopup(popupImg);
+});
+
+btnEdit.addEventListener("click", openPopupProfile); // включение кнопки для редактирование
+editSample.addEventListener("submit", handleSavePopup); // редактирование профиля
+
+btnAdd.addEventListener("click", openPopupAddSubject);
+popupFormAdd.addEventListener("submit", addElement);

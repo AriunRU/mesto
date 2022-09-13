@@ -33,12 +33,12 @@
         <p class="footer__copyright">&copy; 2022. Kirill Sidorkov</p>
     </footer>
 
-    <section class="popup popup_edit_form">
+    <section class="popup popup_type_edit">
         <div class="popup__container">
-            <button class="popup__close" type="button"></button>
+            <button id="popup__close_edit" class="popup__close" type="button"></button>
             <div class="popup__keep">
                 <h2 class="popup__title">Редактировать профиль</h2>
-                <form id="popup__edit_sample" class="popup__form" name="popupForm" novalidate>
+                <form id="popup__form_edit" class="popup__form" name="popupForm" novalidate>
                     <input id="popup__type_name" class="popup__input" type="text" placeholder="Жак-Ив-Кусто" required>
                     <input id="popup__type_job" class="popup__input" type="text" placeholder="Исследователь океана" required>
                     <button class="popup__button" type="submit" value="save">Сохранить</button>
@@ -47,9 +47,9 @@
         </div>
     </section>
 
-    <section class="popup popup_add_element">
+    <section class="popup popup_type_add">
         <div class="popup__container">
-            <button class="popup__close" type="button"></button>
+            <button id="popup__close_add" class="popup__close" type="button"></button>
             <div class="popup__keep">
                 <h2 class="popup__title">Новое место</h2>
                 <form id="popup__form_add" class="popup__form" name="popupForm" novalidate>
@@ -61,9 +61,9 @@
         </div>
     </section>
 
-    <section class="popup popup_image_full">
+    <section class="popup popup_image">
         <div class="popup__case">
-            <button class="popup__close" type="button"></button>
+            <button id="popup__close_img" class="popup__close" type="button"></button>
             <img class="popup__image" src="#" alt="Картинка">
             <h2 class="popup__caption"></h2>
         </div>
