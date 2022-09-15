@@ -140,8 +140,8 @@ buttonCloseImg.addEventListener('click', function () {
   closePopup(popupImg);
 });
 
-btnEdit.addEventListener("click", openPopupProfile); // включение кнопки для редактирование
-editSample.addEventListener("submit", handleSavePopup); // редактирование профиля
+btnEdit.addEventListener("click", openPopupProfile);
+editSample.addEventListener("submit", handleSavePopup); 
 
 btnAdd.addEventListener("click", openPopupAddSubject);
 popupFormAdd.addEventListener("submit", addElement);

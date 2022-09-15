@@ -39,8 +39,13 @@
             <div class="popup__keep">
                 <h2 class="popup__title">Редактировать профиль</h2>
                 <form id="popup__form_edit" class="popup__form" name="popupForm" novalidate>
-                    <input id="popup__type_name" class="popup__input" type="text" placeholder="Жак-Ив-Кусто" required>
-                    <input id="popup__type_job" class="popup__input" type="text" placeholder="Исследователь океана" required>
+                    <label class="popup__label"><input id="popup__type_name" class="popup__input" type="text"
+                            placeholder="Жак-Ив-Кусто" minlength="2" maxlength="40" required>
+                    </label>
+
+                    <label class="popup__label"><input id="popup__type_job" class="popup__input" type="text"
+                            placeholder="Исследователь океана" minlength="2" maxlength="200" required>
+                    </label>
                     <button class="popup__button" type="submit" value="save">Сохранить</button>
                 </form>
             </div>
@@ -53,8 +58,12 @@
             <div class="popup__keep">
                 <h2 class="popup__title">Новое место</h2>
                 <form id="popup__form_add" class="popup__form" name="popupForm" novalidate>
-                    <input id="popup__type_title" class="popup__input" type="text" placeholder="Название" required>
-                    <input  id="popup__type_link" class="popup__input" type="url" placeholder="Ссылка на картинку" required>
+                    <label class="popup__label"><input id="popup__type_title" class="popup__input" type="text"
+                            placeholder="Название" minlength="2" maxlength="30" required>
+                    </label>
+                    <label class="popup__label"><input id="popup__type_link" class="popup__input" type="url"
+                            placeholder="Ссылка на картинку" required>
+                    </label>
                     <button type="submit" class="popup__button">Создать</button>
                 </form>
             </div>
