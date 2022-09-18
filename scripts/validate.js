@@ -12,7 +12,7 @@ function setEventListeners (formElement,cfg) {
     
   inputList.forEach((inputElement) => {
     inputElement.addEventListener('input', function () {
-      checkInputValidity(formElement, inputElement, cfg);
+      checkInputValidity(inputElement, formElement, cfg);
       toggleButtonState(inputList, buttonElement, cfg);
     });
   });
@@ -21,9 +21,7 @@ function setEventListeners (formElement,cfg) {
 function checkInputValidity (formElement, inputElement, cfg) {
   if (!inputElement.validity.valid) {
     showInputError(formElement, inputElement, inputElement.validationMessage, cfg);
-  }
-  else
-  {
+  } else {
     hideInputError(formElement, inputElement, cfg);
   }
 };
