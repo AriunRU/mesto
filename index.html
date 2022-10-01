@@ -30,7 +30,7 @@
     </main>
 
     <footer class="footer">
-        <p class="footer__copyright">&copy; 2022. Kirill Sidorkov</p>
+        <p class="footer__copyright">&copy; 2022. Kirill Golovin</p>
     </footer>
 
     <section class="popup popup_type_edit">
@@ -38,12 +38,12 @@
             <button id="popup__close_edit" class="popup__close" type="button"></button>
             <div class="popup__keep">
                 <h2 class="popup__title">Редактировать профиль</h2>
-                <form id="popup__form_edit" class="popup__form" name="popupForm" novalidate>
-                    <input id="popup__type_name" class="popup__input" type="text" placeholder="Жак-Ив-Кусто" required
-                        minlength="2" maxlength="40">
+                <form id="popup__form_edit" class="popup__form" name="edit" novalidate>
+                    <input id="popup__type_name" class="popup__input" type="text" placeholder="Жак-Ив-Кусто"
+                        minlength="2" maxlength="40" required />
                     <span id="name-error" class="popup__error"></span>
                     <input id="popup__type_job" class="popup__input" type="text" placeholder="Исследователь океана"
-                        required minlength="2" maxlength="200">
+                        minlength="2" maxlength="200" required />
                     <span id="job-error" class="popup__error"></span>
                     <button class="popup__button" type="submit" value="save">Сохранить</button>
                 </form>
@@ -56,12 +56,12 @@
             <button id="popup__close_add" class="popup__close" type="button"></button>
             <div class="popup__keep">
                 <h2 class="popup__title">Новое место</h2>
-                <form id="popup__form_add" class="popup__form" name="popupForm" novalidate>
-                    <input id="popup__type_title" class="popup__input" type="text" placeholder="Название" required
-                        minlength="2" maxlength="30">
+                <form id="popup__form_add" class="popup__form" name="add" novalidate>
+                    <input id="popup__type_title" class="popup__input" type="text" placeholder="Название" minlength="2"
+                        maxlength="30" required />
                     <span id="title-error" class="popup__error"></span>
                     <input id="popup__type_link" class="popup__input" type="url" placeholder="Ссылка на картинку"
-                        required>
+                        required />
                     <span id="link-error" class="popup__error"></span>
                     <button type="submit" class="popup__button">Создать</button>
                 </form>

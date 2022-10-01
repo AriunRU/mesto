@@ -1,18 +1,18 @@
 function enableValidation (cfg) {
   const formList = Array.from(document.querySelectorAll(cfg.formSelector));
   formList.forEach((formElement) => {
-    setEventListeners(formElement,cfg);
+    setEventListeners(formElement, cfg);
   });
 };
 
-function setEventListeners (formElement,cfg) {
+function setEventListeners (formElement, cfg) {
   const inputList = Array.from(formElement.querySelectorAll(cfg.inputSelector));
   const buttonElement = formElement.querySelector(cfg.submitButtonSelector);
-  toggleButtonState(inputList, buttonElement,cfg);
+  toggleButtonState(inputList, buttonElement, cfg);
     
   inputList.forEach((inputElement) => {
     inputElement.addEventListener('input', function () {
-      checkInputValidity(inputElement, formElement, cfg);
+      checkInputValidity(formElement, inputElement, cfg);
       toggleButtonState(inputList, buttonElement, cfg);
     });
   });
@@ -27,13 +27,13 @@ function checkInputValidity (formElement, inputElement, cfg) {
 };
 
 function showInputError (formElement, inputElement, cfg, errorMessage) {
-  const errorElement = formElement.querySelector(`.popup__error_${inputElement.id}`);
+  const errorElement = formElement.querySelector(`#${inputElement.id}-error`);
   inputElement.classList.add(cfg.inputErrorClass);
   errorElement.textContent = errorMessage;
 };
   
 function hideInputError (formElement, inputElement, cfg) {
-  const errorElement = formElement.querySelector(`.popup__error_${inputElement.id}`);
+  const errorElement = formElement.querySelector(`#${inputElement.id}-error`);
   inputElement.classList.remove(cfg.inputErrorClass);  
   errorElement.textContent = '';  
 };

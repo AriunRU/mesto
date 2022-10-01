@@ -26,7 +26,7 @@ const popupFormAdd = document.querySelector("#popup__form_add"); // строка
 const editSample = document.querySelector("#popup__form_edit"); // Измениние профиля
 
 
-function renderList(info) { // Проверка массива
+function renderList(info) {
   info.forEach((item) => renderCard(item));
 }
 
