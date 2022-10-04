@@ -25,7 +25,6 @@ const popupProfile = document.querySelector(".popup_type_edit"); // попап �
 const popupFormAdd = document.querySelector("#popup__form_add"); // строка с внесением ссылки на картинку
 const editSample = document.querySelector("#popup__form_edit"); // Измениние профиля
 
-
 function renderList(info) {
   info.forEach((item) => renderCard(item));
 }
