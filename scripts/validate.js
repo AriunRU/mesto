@@ -1,13 +1,3 @@
-const validationConfig = {
-  formSelector: ".popup__form",
-  inputSelector: ".popup__input",
-  submitButtonSelector: ".popup__button",
-  popupErrorSelector: ".popup__error",
-  inactiveButtonClass: "popup__button_disabled",
-  inputErrorClass: "popup__input_error",
-  errorClass: "popup__error_visible",
-};
-
 function enableValidation (cfg) {
   const formList = Array.from(document.querySelectorAll(cfg.formSelector));
   formList.forEach((formElement) => {
@@ -69,4 +59,12 @@ function toggleButtonState(inputList, buttonElement, cfg) {
   }
 }
 
-enableValidation(validationConfig);
+enableValidation({
+  formSelector: ".popup__form",
+  inputSelector: ".popup__input",
+  submitButtonSelector: ".popup__button",
+  popupErrorSelector: ".popup__error",
+  inactiveButtonClass: "popup__button_disabled",
+  inputErrorClass: "popup__input_error",
+  errorClass: "popup__error_visible",
+});
