@@ -42,7 +42,6 @@ function checkInputValidity(formElement, inputElement, cfg) {
 }
 
 function showInputError(formElement, inputElement, errorMessage, cfg) {
-  console.log(errorMessage);
   const errorElement = formElement.querySelector(`#${inputElement.id}-error`);
   inputElement.classList.add(cfg.inputErrorClass);
   errorElement.textContent = errorMessage;
