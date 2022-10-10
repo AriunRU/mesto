@@ -87,10 +87,10 @@ function elementLikeActive(evt) { // Функция Лайка карточки
 }
 
 function openPopupImage(evt) { // Функция увеличения карточки
-  openPopup(popupImg);
   popupImage.src = `${evt.target.src}`;
   popupCaption.textContent = `${evt.target.alt}`;
   popupImage.alt = `${evt.target.alt}`;
+  openPopup(popupImg);
 }
 
 function openPopupAddSubject() {
@@ -101,8 +101,8 @@ function openPopupAddSubject() {
 
 function addElement(evt) {
   evt.preventDefault();
-  let name = titleInput.value;
-  let link = linkInput.value;
+  const name = titleInput.value;
+  const link = linkInput.value;
   renderCard({ name, link });
   closePopup(popupAddSubject);
 }
@@ -120,8 +120,8 @@ function clickOverlayPopup(evt) { //закрытие попапа через о�
 }
 
 function closeOnEscape(evt) { // закрытие через esc
-  let popup;
   if (evt.key === "Escape") {
+    let popup;
     popup = document.querySelector(".popup_opened");
     closePopup(popup);
   }
