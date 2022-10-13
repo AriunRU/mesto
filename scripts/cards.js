@@ -1,26 +1,26 @@
 const initialCards = [
   {
-    name: "Помощник",
-    link: "./image/elements/Помощник.jpg",
+    name: "Презрение",
+    link: "./image/elements/1.jpeg",
   },
   {
-    name: "Интересное",
-    link: "./image/elements/Интересное.jpg",
+    name: "Страх",
+    link: "./image/elements/2.jpeg",
   },
   {
-    name: "Ошибка",
-    link: "./image/elements/Ошибка.jpg",
+    name: "Маленькость",
+    link: "./image/elements/3.jpg",
   },
   {
-    name: "Ужас",
-    link: "./image/elements/Ужас.jpg",
+    name: "Голод",
+    link: "./image/elements/4.jpg",
   },
   {
-    name: "ТЗ",
-    link: "./image/elements/ТЗ.jpg",
+    name: "Наглость",
+    link: "./image/elements/5.jpg",
   },
   {
-    name: "Шутка",
-    link: "./image/elements/Шутка.jpg",
+    name: "Печаль",
+    link: "./image/elements/6.jpg",
   },
 ];
