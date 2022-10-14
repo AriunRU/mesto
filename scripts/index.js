@@ -59,6 +59,9 @@ function openPopup(popup) { // Функция открытия попапа
   popup.classList.add("popup_opened");
   document.addEventListener("keydown", closeOnEscape);
   popup.addEventListener('click', clickOverlayPopup);
+  const btn = popup.querySelector('.popup__button');
+  btn.classList.add("popup__button_disabled");
+  btn.disabled = true;
 }
 
 function openPopupProfile(evt) {
