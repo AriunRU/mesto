@@ -1,6 +1,7 @@
 function setEventListeners(formElement, cfg) {
   const inputList = Array.from(formElement.querySelectorAll(cfg.inputSelector));
   const buttonElement = formElement.querySelector(cfg.submitButtonSelector);
+
   toggleButtonState(inputList, buttonElement, cfg);
 
   inputList.forEach((inputElement) => {
@@ -42,13 +43,22 @@ function hasInvalidInput(inputList) {
   });
 }
 
+function addSubmitButton(buttonElement, cfg) {
+  buttonElement.classList.add(cfg.disabledButtonClass);
+  buttonElement.disabled = true;
+}
+
+function removeSubmitButton(buttonElement, cfg) {
+  buttonElement.classList.remove(cfg.disabledButtonClass);
+  buttonElement.disabled = false;
+}
+
 function toggleButtonState(inputList, buttonElement, cfg) {
+  console.log(hasInvalidInput(inputList));
   if (hasInvalidInput(inputList)) {
-    buttonElement.classList.add(cfg.disabledButtonClass);
-    buttonElement.disabled = true;
+    addSubmitButton(buttonElement, cfg);
   } else {
-    buttonElement.classList.remove(cfg.disabledButtonClass);
-    buttonElement.disabled = false;
+    removeSubmitButton(buttonElement, cfg);
   }
 }
 
