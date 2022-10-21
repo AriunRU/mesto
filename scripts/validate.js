@@ -54,7 +54,6 @@ function removeSubmitButton(buttonElement, cfg) {
 }
 
 function toggleButtonState(inputList, buttonElement, cfg) {
-  console.log(hasInvalidInput(inputList));
   if (hasInvalidInput(inputList)) {
     addSubmitButton(buttonElement, cfg);
   } else {

@@ -22,8 +22,11 @@ const popupImg = document.querySelector(".popup_image"); // увеличение
 const popupAdd = document.querySelector(".popup_type_add"); // попап с добавлением элемента
 const buttonAdd = document.querySelector("#buttonAdd");
 const popupEdit = document.querySelector(".popup_type_edit"); // попап с инфой
-const popupFormAdd = document.querySelector("#popup__form_add"); // строка с внесением ссылки на картинку
+const popupFormAdd = document.querySelector("#popup__form_add"); 
 const popupFormEdit = document.querySelector("#popup__form_edit"); // Измениние профиля
+const inputList = Array.from(popupAdd.querySelectorAll(".popup__input"));
+const buttonElement = popupAdd.querySelector(".popup__button");
+const submitButtonAddPlace = popupFormAdd.querySelector(".popup__button");
 
 // Функция открытия попапа
 function openPopup(popup) {
@@ -73,7 +76,14 @@ btnEdit.addEventListener("click", function () {
 
 btnAdd.addEventListener("click", function () {
   openPopup(popupAdd);
+  setDefaultPopup();
 });
+
+function setDefaultPopup(){
+  buttonAdd.classList.add("popup__button_disabled");
+  buttonAdd.disabled = true;
+  popupFormAdd.reset();
+}
 
 function editPopupValue() {
   nameInput.value = username.textContent;
@@ -112,13 +122,12 @@ function addElement(evt) {
     name: titleInput.value,
     link: linkInput.value,
   };
-  const inputList = Array.from(popupAdd.querySelectorAll('.popup__input'));
-  const buttonElement = popupAdd.querySelector('.popup__button'); 
 
-  popupFormAdd.reset();
   renderCard(info);
   closePopup(popupAdd);
-  toggleButtonState(inputList, buttonElement, { disabledButtonClass: "popup__button_disabled" });
+  popupFormAdd.reset();
+  
+  //toggleButtonState(inputList, buttonElement, { disabledButtonClass: "popup__button_disabled" });
 }
 
 // создание новой карточки
