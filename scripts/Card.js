@@ -24,13 +24,13 @@ export default class Card {
     elementImage.addEventListener('click', () => {
     this._openPopup(this._name, this._link);
     });
-    //лайк
+    //its like
     const likeElement = elementCard.querySelector('.element__heart');
     function elementLikeActive(evt) {
       evt.target.classList.toggle("element__heart_active");
     }
     likeElement.addEventListener('click', elementLikeActive);
-    // корзина
+    // its delete card
     const deleteCard = elementCard.querySelector('.element__remove');
     function deleteCardItem(evt) {
       evt.target.closest(".element__item").remove();

@@ -122,8 +122,10 @@ function editPopupValue() {
 // сабмит на форму профайла
 function handleEditSubmit(evt) {
   evt.preventDefault();
+
   const profileNameInput = nameInput.value;
   const profileJobInput = jobInput.value;
+  
   username.textContent = profileNameInput;
   job.textContent = profileJobInput;
   closePopup(popupEdit);
