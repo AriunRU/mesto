@@ -1,5 +1,27 @@
 import Card from './Card.js';
+import {initialCards} from './cards.js';
 import FormValidator from './FormValidator.js';
+
+const fullElementCard = {
+  card: '.element__item',
+  img: '.element__img',
+  text: '.element__title',
+  like: '.element__heart',
+  deleteBtn: '.element__remove',
+  popupPhoto: '.popup_image',
+  popupPhotoImg: '.popup__image',
+  popupPhotoText: '.popup__caption',
+  popupPhotoCloseBtn: '.popup__close'
+};
+
+const enableValidation = {
+  formSelector: ".popup__form",
+  inputSelector: ".popup__input",
+  submitButtonSelector: ".popup__button",
+  disabledButtonClass: "popup__button_disabled",
+  inputErrorClass: "popup__input_error",
+  errorClass: "popup__error_visible",
+};
 
 //Создание переменных из профиля
 const btnEdit = document.querySelector(".profile__edit-button"); // кнопка карандашик
@@ -11,7 +33,8 @@ const buttonCloseImg = document.querySelector("#popup__close_img");
 const username = document.querySelector(".profile__name"); // Имя
 const job = document.querySelector(".profile__job"); // Проффессия
 //Создание переменных из карточек
-const massElements = document.querySelector(".elements"); // Массив
+const massElements = document.querySelector(".elements");
+const cardElement = document.querySelector(".element").content;
 //Создание переменных из попапа
 const nameInput = document.querySelector("#popup__type_name"); // строка с изменением имени
 const jobInput = document.querySelector("#popup__type_job"); // строка с изменением проффессии
@@ -87,45 +110,18 @@ function setDefaultPopup() {
   popupFormAdd.reset();
 }
 
-const initialCards = [
-  {
-    name: "Презрение",
-    link: "./image/elements/1.jpeg",
-  },
-  {
-    name: "Страх",
-    link: "./image/elements/2.jpeg",
-  },
-  {
-    name: "Маленькость",
-    link: "./image/elements/3.jpg",
-  },
-  {
-    name: "Голод",
-    link: "./image/elements/4.jpg",
-  },
-  {
-    name: "Наглость",
-    link: "./image/elements/5.jpg",
-  },
-  {
-    name: "Печаль",
-    link: "./image/elements/6.jpg",
-  },
-];
+
+
 
 function editPopupValue() {
   nameInput.value = username.textContent;
   jobInput.value = job.textContent;
 }
 
-// сабмит на форму профайла
 function handleEditSubmit(evt) {
   evt.preventDefault();
-
   const profileNameInput = nameInput.value;
-  const profileJobInput = jobInput.value;
-  
+  const profileJobInput = jobInput.value
   username.textContent = profileNameInput;
   job.textContent = profileJobInput;
   closePopup(popupEdit);
@@ -138,32 +134,30 @@ const openPopupImage = (caption, link) => {
   openPopup(popupImg)
 };
 
+function createCard(data) {
+  const card = new Card(data, cardElement, fullElementCard, openPopupImage);
+  const element = card.createCard();
+  return element;
+}
+
+function addNewCard() {
+  const name = titleInput.value;
+  const link = linkInput.value;
+  const cardItem = createCard({name, link});
+  massElements.prepend(cardItem);
+}
+
 const handleAddSubmit = function (evt) {
   evt.preventDefault();
-  const info = {
-    name: titleInput.value,
-    link: linkInput.value,
-  }
-  const card = new Card(info, '.element', openPopupImage)
-  massElements.prepend(card.addElementCard());
+  addNewCard();
   evt.target.reset();
   closePopup(popupAdd);
 };
 
-initialCards.forEach(element => {
-  const card = new Card(element, '.element', openPopupImage)
-  massElements.append(card.addElementCard())
+initialCards.forEach(function (evt) {
+  const card = createCard(evt);
+  massElements.append(card);
 });
-
-
-const enableValidation = {
-  formSelector: ".popup__form",
-  inputSelector: ".popup__input",
-  submitButtonSelector: ".popup__button",
-  disabledButtonClass: "popup__button_disabled",
-  inputErrorClass: "popup__input_error",
-  errorClass: "popup__error_visible",
-};
 
 popupEditContent.addEventListener('submit', handleEditSubmit);
 popupAddContent.addEventListener('submit', handleAddSubmit);
