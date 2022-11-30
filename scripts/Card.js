@@ -20,6 +20,7 @@ export default class Card {
   }
   _deletePhoto() {
     this._element.remove();
+    this._element = null;
   }
   _setCardEventListeners() {
     this._buttonDelete.addEventListener('click', () => this._deletePhoto());
