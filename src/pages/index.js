@@ -1,8 +1,13 @@
 import './index.css';
 
-import Card from './Card.js';
-import {initialCards} from './cards.js';
-import FormValidator from './FormValidator.js';
+import Card from './components/Card.js';
+import {initialCards} from './components/cards.js';
+import FormValidator from './components/FormValidator.js';
+import Popup from './components/Popup.js';
+import PopopWithForm from './components/PopopWithForm.js';
+import PopopWithImage from './components/PopopWithImage.js';
+import Section from './components/Section.js';
+import UserInfo from './components/UserInfo.js';
 
 const fullElementCard = {
   card: '.element__item',
