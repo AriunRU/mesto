@@ -2,109 +2,94 @@
 <html lang="ru">
 
 <head>
-    <meta charset="UTF-8">popup__input
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="distribution" content="global">
-    <meta name="description" content="Проект Яндекс практикум - Mesto">
-    <title>Mesto</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mesto</title>
 </head>
-<!-- <div clacc="#" id="#"></div> -->
-<!-- <img clacc="#" id="#" src="#" alt="#"></img> -->
-<!-- <button clacc="#" id="#" type="button"></div> -->
+
+<!-- 1. не сохраняеться имя, профессия (сбрасывает форму)-->
+<!-- 2. Валидация есть но не отображается -->
+<!-- 3. Не прогружаються карточки из ссылки -->
 
 <body class="body">
-    <div class="page">
-        <!--Шапка!-->
-        <header class="header">
-            <img class="header__logo" id="head-logo" src="<%=require('./image/header/image.svg')%>" alt="Логотип Место">
-        </header>
-        <main class="content">
-            <!--Профиль!-->
-            <section class="profile">
-                <img class="profile__image" src="./image/profile/__image.jpg" alt="Фото Жак-Ив-Кусто">
-                <div class="profile__info">
-                    <div class="profile__name-box">
-                        <h1 class="profile__name">Жак-Ив Кусто</h1>
-                        <button class="profile__edit-button" type="button"></button>
-                    </div>
-                    <p class="profile__job">Исследователь Котанов</p>
-                </div>
-                <button class="profile__add-button" type="button"></button>
-            </section>
-            <!--Карточки!-->
-            <section class="elements"></section>
-        </main>
-        <!--Подвал!-->
-        <footer class="footer">
-            <p class="footer__copyright">&copy; 2022. Kirill Golovin</p>
-        </footer>
+  <div class="page">
+    <header class="header">
+      <img class="header__logo" id="head-logo" src="<%=require('./image/header/image.svg')%>" alt="Логотип Место">
+    </header>
+    <main class="content">
+      <section class="profile">
+        <img class="profile__image" src="<%=require('./image/profile/__image.jpg')%>" alt="Фото Жак-Ив-Кусто">
+        <div class="profile__info">
+          <h1 class="profile__name">Жак-Ив Кото</h1>
+          <button class="profile__edit-button" type="button"></button>
+          <p class="profile__job">Исследователь Котанов</p>
+        </div>
+        <button class="profile__add-button" type="button"></button>
+      </section>
+
+      <section class="elements"></section>
+    </main>
+
+    <footer class="footer">
+      <p class="footer__copyright">&copy; 2022. Kirill Golovin</p>
+    </footer>
+  </div>
+
+  <section class="popup popup_type_edit">
+    <div class="popup__container">
+      <form class="popup__form popup__form_edit" method="post" name="profileEditForm" novalidate>
+        <button class="popup__close" id="popup__close_edit" type="button"></button>
+        <h2 class="popup__title">Редактировать профиль</h2>
+        <fieldset class="popup__inputs" id="popup__form_edit" name="edit" novalidate>
+          <input class="popup__input" id="popup__type_name" type="text" placeholder="Жак-Ив-Кусто" minlength="2"
+            maxlength="40" required>
+          <span class="popup__error" id="popup__type_name-error"></span>
+          <input class="popup__input" id="popup__type_job" type="text" placeholder="Исследователь океана" minlength="2"
+            maxlength="200" required>
+          <span class="popup__error" id="popup__type_job-error"></span>
+          <button class="popup__button" type="submit">Сохранить</button>
+        </fieldset>
+      </form>
     </div>
-    <!--Попап редактирования!-->
-    <section class="popup popup_type_edit">
-        <div class="popup__container">
-            <form class="popup__form" id="profile-edit-form" method="post" name="profileEditForm" novalidate>
-                <button class="popup__close" id="popup__close_edit" type="button"></button>
-                <h2 class="popup__title">Редактировать профиль</h2>
-                <fieldset class="popup__inputs" id="popup__form_edit" name="edit" novalidate>
-                    <label>
-                        <input class="popup__input" id="popup__type_name" type="text" placeholder="Жак-Ив-Кусто"
-                            minlength="2" maxlength="40" required>
-                        <span class="popup__error" id="popup__type_name-error"></span>
-                    </label>
-                    <label>
-                        <input class="popup__input" id="popup__type_job" type="text" placeholder="Исследователь океана"
-                            minlength="2" maxlength="200" required>
-                        <span class="popup__error" id="popup__type_job-error"></span>
-                    </label>
-                    <button class="popup__button" type="submit">Сохранить</button>
-                </fieldset>
-            </form>
-        </div>
-    </section>
-    <!--Попап добавления!-->
-    <section class="popup popup_type_add">
-        <div class="popup__container">
-            <form class="popup__form" id="profile-add-form" method="post" name="profileEditForm" novalidate>
-                <button class="popup__close" id="popup__close_add" type="button"></button>
-                <h2 class="popup__title">Новое место</h2>
-                <fieldset class="popup__inputs" id="popup__form_add" name="add" novalidate>
-                    <label>
-                        <input class="popup__input" id="popup__type_title" type="text" placeholder="Название"
-                            minlength="2" maxlength="30" required>
-                        <span class="popup__error" id="popup__type_title-error"></span>
-                    </label>
-                    <label>
-                        <input class="popup__input" id="popup__type_link" type="url" placeholder="Ссылка на картинку"
-                            required>
-                        <span class="popup__error" id="popup__type_link-error"></span>
-                    </label>
-                    <button class="popup__button" id="buttonAdd" type="submit">Создать</button>
-                </fieldset>
-            </form>
-        </div>
-    </section>
-    <!--Попап увеличения!-->
-    <section class="popup popup_image">
-        <div>
-            <figure class="popup__case">
-                <img class="popup__image" src="#" alt="Картинка">
-                <figcaption class="popup__caption"></figcaption>
-            </figure>
-            <button class="popup__close" id="popup__close_img" type="button"></button>
-        </div>
-    </section>
-    <!--Попап управления!-->
-    <template class="element">
-        <li class="element__item">
-            <img class="element__img">
-            <div class="element__group">
-                <h3 class="element__title"></h3>
-                <button class="element__heart" type="button"></button>
-            </div>
-            <button class="element__remove" type="button"></button>
-        </li>
-    </template>
-    <script type="module" src="./scripts/index.js"></script>
+  </section>
+
+  <section class="popup popup_type_add">
+    <div class="popup__container">
+      <form class="popup__form popup__form_add" method="post" name="profileEditForm" novalidate>
+        <button class="popup__close" id="popup__close_add" type="button"></button>
+        <h2 class="popup__title">Новое место</h2>
+        <fieldset class="popup__inputs" id="popup__form_add" name="add" novalidate>
+          <input class="popup__input" id="popup__type_title" type="text" placeholder="Название" minlength="2"
+            maxlength="30" required>
+          <span class="popup__error" id="popup__type_title-error"></span>
+          <input class="popup__input" id="popup__type_link" type="url" placeholder="Ссылка на картинку" required>
+          <span class="popup__error" id="popup__type_link-error"></span>
+          <button class="popup__button" type="submit">Создать</button>
+        </fieldset>
+      </form>
+    </div>
+  </section>
+
+  <section class="popup popup_image">
+    <div>
+      <figure class="popup__case">
+        <img class="popup__image" src="#" alt="Картинка">
+        <figcaption class="popup__caption"></figcaption>
+      </figure>
+      <button class="popup__close" id="popup__close_img" type="button"></button>
+    </div>
+  </section>
+
+  <template class="element">
+    <li class="element__item">
+      <div class="element__img"></div>
+      <div class="element__group">
+        <h3 class="element__title"></h3>
+        <button class="element__heart" type="button"></button>
+      </div>
+      <button class="element__remove" type="button"></button>
+    </li>
+  </template>
 </body>
 
 </html>

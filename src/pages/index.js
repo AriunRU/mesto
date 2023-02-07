@@ -2,26 +2,26 @@ import './index.css';
 import {Card} from '../components/Card.js';
 import {initialCards} from '../utils/cards.js';
 import {FormValidator} from '../components/FormValidator.js';
-import {PopupWithImage} from '../components/PopopWithImage.js';
-import {PopupWithForm} from '../components/PopopWithForm.js';
+import {PopupWithImage} from '../components/PopupWithImage.js';
+import {PopupWithForm} from '../components/PopupWithForm.js';
 import {Section} from '../components/Section.js';
 import {UserInfo} from '../components/UserInfo.js';
 import * as constants from '../utils/constants.js';
 
-const userInfo = new UserInfo(constants.userNameSelector, constants.userAboutSelector)
-const imageViewPopup = new PopupWithImage(constants.imagePopupSelector)
-const profileEditFormPopup = new PopupWithForm(constants.profileEditPopupSelector, handleProfileEditFormSubmitData)
-const newCardPopup = new PopupWithForm(constants.newCardPopupSelector, handleSubmitAddCardForm)
-const profileFormValidation = new FormValidator(constants.enableValidation, constants.profileEditForm);
-const newCardFormValidation = new FormValidator(constants.enableValidation, constants.newCardForm);
-const cardSection = new Section({items: initialCards, renderer: renderCard}, constants.cardsSection)
+const userInfo = new UserInfo(constants.userName, constants.job)
+const imageViewPopup = new PopupWithImage(constants.popupImg)
+const profileEditFormPopup = new PopupWithForm(constants.popupEdit, handleProfileEditFormSubmitData)
+const newCardPopup = new PopupWithForm(constants.popupAdd, handleSubmitAddCardForm)
+const profileFormValidation = new FormValidator(constants.configValidation, constants.popupEditForm);
+const newCardFormValidation = new FormValidator(constants.configValidation, constants.addCardForm);
+const cardSection = new Section({item: initialCards, renderer: renderCard}, constants.massElements)
 
-function renderCard(cardData) {
-  cardSection.addCard(createCard(cardData))
+function renderCard(data) {
+  cardSection.addCard(createCard(data))
 }
 
-const createCard = (cardData) => {
-  return new Card(cardData, constants.cardTemplateSelector, handleCardClick).generateCard()
+const createCard = (data) => {
+  return new Card(data, constants.cardElement, handleClickCard).generateCard()
 }
 
 function handleProfileEditFormOpen() {
@@ -42,12 +42,12 @@ function handleNewCardFormOpen() {
   newCardPopup.open()
 }
 
-function handleSubmitAddCardForm(cardData) {
-  renderCard(cardData)
+function handleSubmitAddCardForm(data) {
+  renderCard(data)
   newCardPopup.close()
 }
 
-const handleCardClick = (link, name) => imageViewPopup.open(link, name)
+const handleClickCard = (link, name) => imageViewPopup.open(link, name)
 
 profileFormValidation.enableValidation()
 newCardFormValidation.enableValidation()
@@ -56,7 +56,7 @@ cardSection.renderItems();
 newCardPopup.setEventsListeners()
 imageViewPopup.setEventsListeners()
 
-constants.buttonNewCard.addEventListener('click', handleNewCardFormOpen)
+constants.buttonAddCard.addEventListener('click', handleNewCardFormOpen)
 constants.profileButton.addEventListener('click', handleProfileEditFormOpen)
 
-export {handleCardClick}
+export {handleClickCard}

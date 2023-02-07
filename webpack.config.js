@@ -13,9 +13,13 @@ module.exports = {
   mode: 'development',
   devServer: {
     static: path.resolve(__dirname, './dist'),
-    compress: true,
-    port: 8080,
+    compress: false,
+    port: 8095,
+    //devtool: 'inline-source-map',
     open: true
+  },
+  optimization: {
+    minimize: false
   },
   module: {
     rules: [
@@ -57,3 +61,4 @@ module.exports = {
     new MiniCssExtractPlugin()
   ]
 };
+

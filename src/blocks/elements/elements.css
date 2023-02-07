@@ -1,5 +1,5 @@
 .elements {
-    margin: 50px auto 67px;
+    margin: 0px auto 67px;
     display: grid;
     justify-content: center;
     grid-template-rows: repeat(2, 361px);
