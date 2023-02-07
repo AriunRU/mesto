@@ -13,14 +13,16 @@ export class Popup {
     this._popup.classList.remove('popup_opened')
     document.removeEventListener('keydown', this._handleEscClose)
   }
+
   _handleEscClose(evt) {
     if (evt.code === 'Escape') {
       this.close()
     }
   }
+
   setEventsListeners() {
     this._popup.addEventListener('click', (evt) => {
-      if (evt.target === evt.currentTarget || evt.target.classList.contains('button__close')) {
+      if (evt.target === evt.currentTarget || evt.target.classList.contains('popup__close')) {
         this.close();
       }
     })

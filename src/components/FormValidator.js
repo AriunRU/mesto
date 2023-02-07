@@ -9,11 +9,11 @@ class FormValidator {
     this._buttonSubmitElement = this._formElement.querySelector(this._submitButtonSelector);
   }
 
-  _showInputError(inputElement, errorMessage) {
-    const errorElement = this._formElement.querySelector(`#${inputElement.id}-error`);
-    inputElement.classList.add(this._inputErrorClass);
-    errorElement.textContent = errorMessage;
-    errorElement.classList.add(this._errorClass);
+  _showInputError(inputElement) {
+    inputElement.classList.add(this._inputErrorClass)
+    const errorElement = this._formElement.querySelector(`#${inputElement.id}-error`)
+    errorElement.textContent = inputElement.validationMessage
+    errorElement.classList.add(this._errorClass)
   }
 
   _hideInputError(inputElement) {
@@ -59,7 +59,6 @@ class FormValidator {
 
   enableValidation() {
     this._setEventListeners();
-    //console.log("123123123")
   }
 
   resetValidation() {

@@ -25,9 +25,9 @@ const createCard = (data) => {
 }
 
 function handleProfileEditFormOpen() {
-  const userData = userInfo.getUserInfo()
-  constants.nameInput.value = userData.name
-  constants.jobInput.value = userData.job
+  const data = userInfo.getUserInfo()
+  constants.nameInput.value = data.name
+  constants.jobInput.value = data.job
   profileFormValidation.resetValidation()
   profileEditFormPopup.open()
 }

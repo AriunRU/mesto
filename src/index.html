@@ -7,9 +7,7 @@
   <title>Mesto</title>
 </head>
 
-<!-- 1. не сохраняеться имя, профессия (сбрасывает форму)-->
-<!-- 2. Валидация есть но не отображается -->
-<!-- 3. Не прогружаються карточки из ссылки -->
+<!-- 1. Валидация есть но не отображается -->
 
 <body class="body">
   <div class="page">
@@ -41,10 +39,10 @@
         <button class="popup__close" id="popup__close_edit" type="button"></button>
         <h2 class="popup__title">Редактировать профиль</h2>
         <fieldset class="popup__inputs" id="popup__form_edit" name="edit" novalidate>
-          <input class="popup__input" id="popup__type_name" type="text" placeholder="Жак-Ив-Кусто" minlength="2"
+          <input class="popup__input" id="popup__type_name" type="text" placeholder="Жак-Ив-Кусто" minlength="2" name="name"
             maxlength="40" required>
           <span class="popup__error" id="popup__type_name-error"></span>
-          <input class="popup__input" id="popup__type_job" type="text" placeholder="Исследователь океана" minlength="2"
+          <input class="popup__input" id="popup__type_job" type="text" placeholder="Исследователь океана" minlength="2" name="job"
             maxlength="200" required>
           <span class="popup__error" id="popup__type_job-error"></span>
           <button class="popup__button" type="submit">Сохранить</button>
@@ -59,10 +57,10 @@
         <button class="popup__close" id="popup__close_add" type="button"></button>
         <h2 class="popup__title">Новое место</h2>
         <fieldset class="popup__inputs" id="popup__form_add" name="add" novalidate>
-          <input class="popup__input" id="popup__type_title" type="text" placeholder="Название" minlength="2"
+          <input class="popup__input" id="popup__type_title" type="text" placeholder="Название" minlength="2" name="place"
             maxlength="30" required>
           <span class="popup__error" id="popup__type_title-error"></span>
-          <input class="popup__input" id="popup__type_link" type="url" placeholder="Ссылка на картинку" required>
+          <input class="popup__input" id="popup__type_link" type="url" placeholder="Ссылка на картинку" name="link" required>
           <span class="popup__error" id="popup__type_link-error"></span>
           <button class="popup__button" type="submit">Создать</button>
         </fieldset>
