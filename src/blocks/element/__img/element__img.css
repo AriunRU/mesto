@@ -5,3 +5,7 @@
     box-sizing: border-box;
     object-fit: cover;
 }
+
+.element__img:hover {
+    opacity: 0.6;
+}
