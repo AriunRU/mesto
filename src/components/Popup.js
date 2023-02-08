@@ -5,16 +5,16 @@ export class Popup {
 
   open() {
     this._popup.classList.add('popup_opened');
-    this._handleEscClose = this._handleEscClose.bind(this)
-    document.addEventListener('keydown', this._handleEscClose)
+    this._closeOnEsc = this._closeOnEsc.bind(this)
+    document.addEventListener('keydown', this._closeOnEsc)
   }
 
   close() {
     this._popup.classList.remove('popup_opened')
-    document.removeEventListener('keydown', this._handleEscClose)
+    document.removeEventListener('keydown', this._closeOnEsc)
   }
 
-  _handleEscClose(evt) {
+  _closeOnEsc(evt) {
     if (evt.code === 'Escape') {
       this.close()
     }

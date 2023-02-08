@@ -1,6 +1,6 @@
 class Card {
   constructor(data, template, handleClickCard) {
-    this._templateSelector = template
+    this._template = template
     this._handleCardClick = handleClickCard
     this._place = data.place
     this._link = data.link
@@ -8,7 +8,7 @@ class Card {
 
   _getTemplate() {
     return document
-      .querySelector(this._templateSelector)
+      .querySelector(this._template)
       .content
       .querySelector('.element__item')
       .cloneNode(true)
@@ -29,14 +29,14 @@ class Card {
   }
 
   _handleLikeButtonSwitch() {
-    this._likeBtn.classList.toggle('element__heart_active')
+    this._buttonLike.classList.toggle('element__heart_active')
   }
 
   _setEventListeners() {
-    this._likeBtn = this._element.querySelector('.element__heart')
-    this._likeBtn.addEventListener('click', () => this._handleLikeButtonSwitch())
-    const deleteButton = this._element.querySelector('.element__remove')
-    deleteButton.addEventListener('click', () => this._handleRemoveItem())
+    this._buttonLike = this._element.querySelector('.element__heart')
+    this._buttonLike.addEventListener('click', () => this._handleLikeButtonSwitch())
+    const buttonDelete = this._element.querySelector('.element__remove')
+    buttonDelete.addEventListener('click', () => this._handleRemoveItem())
     this._cardImage.addEventListener('click', () =>
       this._handleCardClick(this._link, this._place))
   }

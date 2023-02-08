@@ -9,11 +9,11 @@ import {UserInfo} from '../components/UserInfo.js';
 import * as constants from '../utils/constants.js';
 
 const userInfo = new UserInfo(constants.userName, constants.job)
-const imageViewPopup = new PopupWithImage(constants.popupImg)
-const profileEditFormPopup = new PopupWithForm(constants.popupEdit, handleProfileEditFormSubmitData)
-const newCardPopup = new PopupWithForm(constants.popupAdd, handleSubmitAddCardForm)
-const profileFormValidation = new FormValidator(constants.configValidation, constants.popupEditForm);
-const newCardFormValidation = new FormValidator(constants.configValidation, constants.addCardForm);
+const imageZoomPopup = new PopupWithImage(constants.popupImg)
+const profileEditForm = new PopupWithForm(constants.popupEdit, editFormSubmitData)
+const cardPopup = new PopupWithForm(constants.popupAdd, addCardForm)
+const popupFormValidation = new FormValidator(constants.configValidation, constants.popupEditForm);
+const cardFormValidation = new FormValidator(constants.configValidation, constants.addCardForm);
 const cardSection = new Section({item: initialCards, renderer: renderCard}, constants.massElements)
 
 function renderCard(data) {
@@ -24,39 +24,39 @@ const createCard = (data) => {
   return new Card(data, constants.cardElement, handleClickCard).generateCard()
 }
 
-function handleProfileEditFormOpen() {
+function profileEditFormOpen() {
   const data = userInfo.getUserInfo()
   constants.nameInput.value = data.name
   constants.jobInput.value = data.job
-  profileFormValidation.resetValidation()
-  profileEditFormPopup.open()
+  popupFormValidation.resetValidation()
+  profileEditForm.open()
 }
 
-function handleProfileEditFormSubmitData(formData) {
+function editFormSubmitData(formData) {
   userInfo.setUserInfo(formData);
-  profileEditFormPopup.close()
+  profileEditForm.close()
 }
 
-function handleNewCardFormOpen() {
-  newCardFormValidation.resetValidation();
-  newCardPopup.open()
+function cardFormOpen() {
+  cardFormValidation.resetValidation();
+  cardPopup.open()
 }
 
-function handleSubmitAddCardForm(data) {
+function addCardForm(data) {
   renderCard(data)
-  newCardPopup.close()
+  cardPopup.close()
 }
 
-const handleClickCard = (link, name) => imageViewPopup.open(link, name)
+const handleClickCard = (link, name) => imageZoomPopup.open(link, name)
 
-profileFormValidation.enableValidation()
-newCardFormValidation.enableValidation()
-profileEditFormPopup.setEventsListeners()
+popupFormValidation.enableValidation()
+cardFormValidation.enableValidation()
+profileEditForm.setEventsListeners()
 cardSection.renderItems();
-newCardPopup.setEventsListeners()
-imageViewPopup.setEventsListeners()
+cardPopup.setEventsListeners()
+imageZoomPopup.setEventsListeners()
 
-constants.buttonAddCard.addEventListener('click', handleNewCardFormOpen)
-constants.profileButton.addEventListener('click', handleProfileEditFormOpen)
+constants.buttonAddCard.addEventListener('click', cardFormOpen)
+constants.profileButton.addEventListener('click', profileEditFormOpen)
 
 export {handleClickCard}
