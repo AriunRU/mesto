@@ -1,62 +1,171 @@
 import './index.css';
-import {Card} from '../components/Card.js';
-import {initialCards} from '../utils/cards.js';
-import {FormValidator} from '../components/FormValidator.js';
-import {PopupWithImage} from '../components/PopupWithImage.js';
-import {PopupWithForm} from '../components/PopupWithForm.js';
-import {Section} from '../components/Section.js';
-import {UserInfo} from '../components/UserInfo.js';
+import { Card } from '../components/Card.js';
+import { FormValidator } from '../components/FormValidator.js';
+import { PopupWithImage } from '../components/PopupWithImage.js';
+import { PopupWithForm } from '../components/PopupWithForm.js';
+import { PopupWithSubmit } from '../components/PopupWithSubmit.js';
+import { Section } from '../components/Section.js';
+import { UserInfo } from '../components/UserInfo.js';
+import { Api } from '../components/Api.js';
+import { configValidation } from '../utils/constants';
 import * as constants from '../utils/constants.js';
+let userId
 
-const userInfo = new UserInfo(constants.userName, constants.job)
-const imageZoomPopup = new PopupWithImage(constants.popupImg)
-const profileEditForm = new PopupWithForm(constants.popupEdit, editFormSubmitData)
-const cardPopup = new PopupWithForm(constants.popupAdd, addCardForm)
-const popupFormValidation = new FormValidator(constants.configValidation, constants.popupEditForm);
-const cardFormValidation = new FormValidator(constants.configValidation, constants.addCardForm);
-const cardSection = new Section({item: initialCards, renderer: renderCard}, constants.massElements)
+const popupProfileForm = new PopupWithForm(constants.popupProfile, submitPopupProfile);
+const popupWithImage = new PopupWithImage(constants.popupImage);
+const popupCard = new PopupWithForm(constants.popupAddCard, submitPopupCard);
+const popupConfirm = new PopupWithSubmit(constants.popupConfirmRemove);
+const popupAvatarForm = new PopupWithForm(constants.popupAvatar, submitPopupAvatar);
+const configValidator = new FormValidator(configValidation, constants.formProfile);
+const cardValidator = new FormValidator(configValidation, constants.formNewCard);
+const avatarValidator = new FormValidator(configValidation, constants.formAvatar);
 
-function renderCard(data) {
-  cardSection.addCard(createCard(data))
+const api = new Api({
+  url: 'https://nomoreparties.co/v1/cohort-58',
+  headers: {
+    authorization: '2e4da387-210d-4156-b421-ffadc6c7daf6',
+    'Content-Type': 'application/json'
+  }
+});
+
+Promise.all([api.getUsersApi(), api.getInitialCards()])
+  .then(([user, cards]) => {
+    userId = user._id;
+    userInfo.letUserInfo(user.name, user.about);
+    userInfo.letUserAvatar(user.avatar);
+    cardList.renderItems(cards);
+  })
+  .catch(err => {
+    console.log(err);
+  });
+
+const userInfo = new UserInfo({
+  name: ".profile__name",
+  job: ".profile__job",
+  avatar: ".profile__image"
+});
+
+function submitPopupAvatar(value) {
+  popupAvatarForm.ButtonLoading(true)
+  api.avatarNewUser(value.avatar)
+    .then(user => {
+      userInfo.letUserAvatar(user.avatar);
+      popupAvatarForm.close()
+    })
+    .catch((err) => {
+      console.log(err);
+    })
+    .finally(() => {
+      popupAvatarForm.ButtonLoading(false)
+    });
 }
 
-const createCard = (data) => {
-  return new Card(data, constants.cardElement, handleClickCard).generateCard()
+function submitPopupProfile(value) {
+  popupProfileForm.ButtonLoading(true)
+  api.infoNewUser(value.name, value.job)
+    .then(user => {
+      userInfo.letUserInfo(user.name, user.about);
+      popupProfileForm.close()
+    })
+    .catch((err) => {
+      console.log(err);
+    })
+    .finally(() => {
+      popupProfileForm.ButtonLoading(false)
+    });
 }
 
-function profileEditFormOpen() {
-  const data = userInfo.getUserInfo()
-  constants.nameInput.value = data.name
-  constants.jobInput.value = data.job
-  popupFormValidation.resetValidation()
-  profileEditForm.open()
+function createCard(item) {
+  const card = new Card({
+    config: item, userId: userId,
+    handleCardClick: (name, link) => {
+      popupWithImage.open(link, name);
+    },
+    handleDeleteClick: (cardId) => {
+      popupConfirm.open()
+      popupConfirm.letSubmit(() => {
+        api.removeCard(cardId)
+          .then(() => {
+            card.handleDeleteCard()
+            popupConfirm.close()
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+      })
+    },
+    handleLikeClick: (cardId) => {
+      api.likeCard(cardId)
+        .then((evt) => {
+          card.handleLikeCard(evt)
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    },
+    handleLikeDelete: (cardId) => {
+      api.deleteLike(cardId)
+        .then((evt) => {
+          card.handleLikeCard(evt)
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
+  }, ".element");
+
+  const cardItem = card.makingCard();
+  return cardItem;
 }
 
-function editFormSubmitData(formData) {
-  userInfo.setUserInfo(formData);
-  profileEditForm.close()
+function submitPopupCard(config) {
+  popupCard.ButtonLoading(true)
+  api.newCard(config.place, config.link)
+    .then((e) => {
+      cardList.addItem(createCard(e));
+      popupCard.close();
+    })
+    .catch((err) => {
+      console.log(err);
+    })
+    .finally(() => {
+      popupCard.ButtonLoading(false)
+    });
 }
 
-function cardFormOpen() {
-  cardFormValidation.resetValidation();
-  cardPopup.open()
-}
+constants.openPopupAvatar.addEventListener("click", () => {
+  popupAvatarForm.open();
+  avatarValidator.resetValidation();
+  avatarValidator._toggleButtonState();
+});
 
-function addCardForm(data) {
-  renderCard(data)
-  cardPopup.close()
-}
+constants.openEditProfilePopup.addEventListener("click", () => {
+  popupProfileForm.open();
+  const input = userInfo.getUserInfo();
+  constants.nameInput.value = input.name;
+  constants.jobInput.value = input.job;
+  configValidator.resetValidation();
+});
 
-const handleClickCard = (link, name) => imageZoomPopup.open(link, name)
+constants.openAddCardPopup.addEventListener("click", () => {
+  popupCard.open()
+  cardValidator.resetValidation();
+  cardValidator._toggleButtonState();
+});
 
-popupFormValidation.enableValidation()
-cardFormValidation.enableValidation()
-profileEditForm.setEventsListeners()
-cardSection.renderItems();
-cardPopup.setEventsListeners()
-imageZoomPopup.setEventsListeners()
+const cardList = new Section(
+  {
+    renderer: (item) => {
+      cardList.addItem(createCard(item));
+    },
+  }, ".elements"
+);
 
-constants.buttonAddCard.addEventListener('click', cardFormOpen)
-constants.profileButton.addEventListener('click', profileEditFormOpen)
-
-export {handleClickCard}
+cardValidator.enableValidation()
+configValidator.enableValidation()
+avatarValidator.enableValidation()
+popupWithImage.setEventListeners();
+popupCard.setEventListeners();
+popupProfileForm.setEventListeners();
+popupConfirm.setEventListeners();
+popupAvatarForm.setEventListeners();

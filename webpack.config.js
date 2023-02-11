@@ -15,7 +15,6 @@ module.exports = {
     static: path.resolve(__dirname, './dist'),
     compress: false,
     port: 8095,
-    //devtool: 'inline-source-map',
     open: true
   },
   optimization: {
