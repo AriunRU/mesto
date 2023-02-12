@@ -2,8 +2,6 @@
 /******/ 	"use strict";
 var __webpack_exports__ = {};
 
-// UNUSED EXPORTS: handleClickCard
-
 ;// CONCATENATED MODULE: ./src/components/Card.js
 function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -12,79 +10,99 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 function _toPropertyKey(arg) { var key = _toPrimitive(arg, "string"); return _typeof(key) === "symbol" ? key : String(key); }
 function _toPrimitive(input, hint) { if (_typeof(input) !== "object" || input === null) return input; var prim = input[Symbol.toPrimitive]; if (prim !== undefined) { var res = prim.call(input, hint || "default"); if (_typeof(res) !== "object") return res; throw new TypeError("@@toPrimitive must return a primitive value."); } return (hint === "string" ? String : Number)(input); }
 var Card = /*#__PURE__*/function () {
-  function Card(data, template, handleClickCard) {
+  function Card(_ref, templateSelector) {
+    var config = _ref.config,
+      userId = _ref.userId,
+      handleCardClick = _ref.handleCardClick,
+      handleDeleteClick = _ref.handleDeleteClick,
+      handleLikeClick = _ref.handleLikeClick,
+      handleLikeDelete = _ref.handleLikeDelete;
     _classCallCheck(this, Card);
-    this._template = template;
-    this._handleCardClick = handleClickCard;
-    this._place = data.place;
-    this._link = data.link;
+    this._link = config.link;
+    this._name = config.name;
+    this._likes = config.likes;
+    this._id = config.owner._id;
+    this._cardId = config._id;
+    this._userId = userId;
+    this._handleCardClick = handleCardClick;
+    this._handleDeleteClick = handleDeleteClick;
+    this._handleLikeClick = handleLikeClick;
+    this._handleLikeDelete = handleLikeDelete;
+    this._templateSelector = templateSelector;
   }
   _createClass(Card, [{
     key: "_getTemplate",
     value: function _getTemplate() {
-      return document.querySelector(this._template).content.querySelector('.element__item').cloneNode(true);
+      var cardElement = document.querySelector(this._templateSelector).content.querySelector(".element__item").cloneNode(true);
+      return cardElement;
     }
   }, {
-    key: "generateCard",
-    value: function generateCard() {
+    key: "makingCard",
+    value: function makingCard() {
+      var _this = this;
       this._element = this._getTemplate();
-      this._cardImage = this._element.querySelector('.element__img');
-      this._cardImage.style.backgroundImage = "url(".concat(this._link);
-      this._element.querySelector('.element__title').textContent = this._place;
+      this._сardImage = this._element.querySelector(".element__img");
+      this._сardImage.src = this._link;
+      this._element.querySelector(".element__title").textContent = this._name;
+      this._сardImage.alt = this._name;
+      this._heartSum = this._element.querySelector(".element__heart-counter");
+      this._heartButton = this._element.querySelector(".element__heart");
+      this._removeButton = this._element.querySelector(".element__remove");
+      this._getLikeSum();
+      this._checkOwner();
       this._setEventListeners();
+      this._likes.forEach(function (like) {
+        if (like._id == _this._userId) {
+          _this._heartButton.classList.add("element__heart_active");
+        }
+      });
       return this._element;
     }
   }, {
-    key: "_handleRemoveItem",
-    value: function _handleRemoveItem() {
-      this._element.remove();
-      this._element = null;
+    key: "handleLikeCard",
+    value: function handleLikeCard(evt) {
+      this._heartButton.classList.toggle("element__heart_active");
+      this._likes = evt.likes;
+      this._getLikeSum();
     }
   }, {
-    key: "_handleLikeButtonSwitch",
-    value: function _handleLikeButtonSwitch() {
-      this._buttonLike.classList.toggle('element__heart_active');
+    key: "handleDeleteCard",
+    value: function handleDeleteCard() {
+      this._element.remove();
+    }
+  }, {
+    key: "_checkOwner",
+    value: function _checkOwner() {
+      if (this._id !== this._userId) {
+        this._removeButton.remove();
+      }
+    }
+  }, {
+    key: "_getLikeSum",
+    value: function _getLikeSum() {
+      this._heartSum.textContent = this._likes.length;
     }
   }, {
     key: "_setEventListeners",
     value: function _setEventListeners() {
-      var _this = this;
-      this._buttonLike = this._element.querySelector('.element__heart');
-      this._buttonLike.addEventListener('click', function () {
-        return _this._handleLikeButtonSwitch();
+      var _this2 = this;
+      this._heartButton.addEventListener("click", function () {
+        if (_this2._heartButton.classList.contains("element__heart_active")) {
+          _this2._handleLikeDelete(_this2._cardId);
+        } else {
+          _this2._handleLikeClick(_this2._cardId);
+        }
       });
-      var buttonDelete = this._element.querySelector('.element__remove');
-      buttonDelete.addEventListener('click', function () {
-        return _this._handleRemoveItem();
+      this._removeButton.addEventListener("click", function () {
+        _this2._handleDeleteClick(_this2._cardId);
       });
-      this._cardImage.addEventListener('click', function () {
-        return _this._handleCardClick(_this._link, _this._place);
+      this._сardImage.addEventListener("click", function () {
+        _this2._handleCardClick(_this2._name, _this2._link);
       });
     }
   }]);
   return Card;
 }();
-
-;// CONCATENATED MODULE: ./src/utils/cards.js
-var initialCards = [{
-  place: "Повис",
-  link: 'https://avatars.dzeninfra.ru/get-zen_doc/4498748/pub_630f826de4c0a0455f3c9d16_630f857347a31d4a75843525/scale_2400'
-}, {
-  place: "Дракот",
-  link: "https://avatars.dzeninfra.ru/get-zen_doc/5231890/pub_630f826de4c0a0455f3c9d16_630f8519db14754ca069f928/scale_2400"
-}, {
-  place: "Зевнул",
-  link: "https://avatars.dzeninfra.ru/get-zen_doc/119173/pub_630f826de4c0a0455f3c9d16_630f84ca7a153f672375a3e7/scale_2400"
-}, {
-  place: "Голод",
-  link: "https://avatars.dzeninfra.ru/get-zen_doc/759807/pub_630f826de4c0a0455f3c9d16_630f84d5b8300a1e706b6d81/scale_2400"
-}, {
-  place: "Наглость",
-  link: "https://avatars.dzeninfra.ru/get-zen_doc/1587012/pub_630f826de4c0a0455f3c9d16_630f85fe268eed05bd93f91f/scale_2400"
-}, {
-  place: "Сплю",
-  link: "https://avatars.dzeninfra.ru/get-zen_doc/4303740/pub_630f826de4c0a0455f3c9d16_630f8501778f3f7313958b39/scale_2400"
-}];
 ;// CONCATENATED MODULE: ./src/components/FormValidator.js
 function FormValidator_typeof(obj) { "@babel/helpers - typeof"; return FormValidator_typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, FormValidator_typeof(obj); }
 function FormValidator_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -97,7 +115,7 @@ var FormValidator = /*#__PURE__*/function () {
     FormValidator_classCallCheck(this, FormValidator);
     this._inputSelector = config.inputSelector;
     this._submitButtonSelector = config.submitButtonSelector;
-    this._inactiveButtonClass = config.disabledButtonClass;
+    this._disabledButtonClass = config.disabledButtonClass;
     this._inputErrorClass = config.inputErrorClass;
     this._errorClass = config.errorClass;
     this._formElement = formElement;
@@ -124,10 +142,10 @@ var FormValidator = /*#__PURE__*/function () {
     key: "_toggleButtonState",
     value: function _toggleButtonState() {
       if (this._hasInvalidInput(this._inputList)) {
-        this._buttonElement.classList.add(this._inactiveButtonClass);
+        this._buttonElement.classList.add(this._disabledButtonClass);
         this._buttonElement.disabled = true;
       } else {
-        this._buttonElement.classList.remove(this._inactiveButtonClass);
+        this._buttonElement.classList.remove(this._disabledButtonClass);
         this._buttonElement.disabled = false;
       }
     }
@@ -175,7 +193,6 @@ var FormValidator = /*#__PURE__*/function () {
   }]);
   return FormValidator;
 }();
-
 ;// CONCATENATED MODULE: ./src/components/Popup.js
 function Popup_typeof(obj) { "@babel/helpers - typeof"; return Popup_typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, Popup_typeof(obj); }
 function Popup_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -186,31 +203,31 @@ function Popup_toPrimitive(input, hint) { if (Popup_typeof(input) !== "object" |
 var Popup = /*#__PURE__*/function () {
   function Popup(popupSelector) {
     Popup_classCallCheck(this, Popup);
-    this._popup = document.querySelector(popupSelector);
-    this._closeOnEsc = this._closeOnEsc.bind(this);
+    this._popup = popupSelector;
+    this._closeEsc = this._closeEsc.bind(this);
   }
   Popup_createClass(Popup, [{
     key: "open",
     value: function open() {
       this._popup.classList.add('popup_opened');
-      document.addEventListener('keydown', this._closeOnEsc);
+      document.addEventListener('keydown', this._closeEsc);
     }
   }, {
     key: "close",
     value: function close() {
       this._popup.classList.remove('popup_opened');
-      document.removeEventListener('keydown', this._closeOnEsc);
+      document.removeEventListener('keydown', this._closeEsc);
     }
   }, {
-    key: "_closeOnEsc",
-    value: function _closeOnEsc(evt) {
+    key: "_closeEsc",
+    value: function _closeEsc(evt) {
       if (evt.code === 'Escape') {
         this.close();
       }
     }
   }, {
-    key: "setEventsListeners",
-    value: function setEventsListeners() {
+    key: "setEventListeners",
+    value: function setEventListeners() {
       var _this = this;
       this._popup.addEventListener('mousedown', function (evt) {
         if (evt.target === evt.currentTarget || evt.target.classList.contains('popup__close')) {
@@ -241,21 +258,21 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 var PopupWithImage = /*#__PURE__*/function (_Popup) {
   _inherits(PopupWithImage, _Popup);
   var _super = _createSuper(PopupWithImage);
-  function PopupWithImage(popupSelector) {
+  function PopupWithImage(popup) {
     var _this;
     PopupWithImage_classCallCheck(this, PopupWithImage);
-    _this = _super.call(this, popupSelector);
-    _this._imageElement = _this._popup.querySelector('.popup__image');
-    _this._imageTitleElement = _this._popup.querySelector('.popup__caption');
+    _this = _super.call(this, popup);
+    _this._imgElem = _this._popup.querySelector('.popup__image');
+    _this._imgTitleElem = _this._popup.querySelector('.popup__caption');
     return _this;
   }
   PopupWithImage_createClass(PopupWithImage, [{
     key: "open",
     value: function open(link, name) {
       _get(_getPrototypeOf(PopupWithImage.prototype), "open", this).call(this);
-      this._imageElement.src = link;
-      this._imageElement.alt = "\u0424\u043E\u0442\u043E: ".concat(name);
-      this._imageTitleElement.textContent = name;
+      this._imgElem.src = link;
+      this._imgElem.alt = name;
+      this._imgTitleElem.textContent = name;
     }
   }]);
   return PopupWithImage;
@@ -280,43 +297,100 @@ function PopupWithForm_getPrototypeOf(o) { PopupWithForm_getPrototypeOf = Object
 var PopupWithForm = /*#__PURE__*/function (_Popup) {
   PopupWithForm_inherits(PopupWithForm, _Popup);
   var _super = PopupWithForm_createSuper(PopupWithForm);
-  function PopupWithForm(popupSelector, handleSubmitForm) {
+  function PopupWithForm(popup, submitForm) {
     var _this;
     PopupWithForm_classCallCheck(this, PopupWithForm);
-    _this = _super.call(this, popupSelector);
-    _this._handleSubmitForm = handleSubmitForm;
-    _this._formElement = _this._popup.querySelector('.popup__form');
-    _this._forminput = _this._popup.querySelectorAll('.popup__input');
+    _this = _super.call(this, popup);
+    _this._submitForm = submitForm;
+    _this._formInputs = Array.from(_this._popup.querySelectorAll(".popup__input"));
+    _this._popupForm = _this._popup.querySelector(".popup__form");
+    _this._buttonSave = _this._popup.querySelector('.popup__button');
+    _this._buttonSaveLoading = _this._buttonSave.textContent;
     return _this;
   }
   PopupWithForm_createClass(PopupWithForm, [{
-    key: "_saveInputsValues",
-    value: function _saveInputsValues() {
+    key: "_getInputValues",
+    value: function _getInputValues() {
       var _this2 = this;
-      this._inputValues = {};
-      this._forminput.forEach(function (input) {
-        _this2._inputValues[input.name] = input.value;
+      this._formInputValues = {};
+      this._formInputs.forEach(function (input) {
+        _this2._formInputValues[input.name] = input.value;
       });
+      return this._formInputValues;
     }
   }, {
-    key: "setEventsListeners",
-    value: function setEventsListeners() {
-      var _this3 = this;
-      PopupWithForm_get(PopupWithForm_getPrototypeOf(PopupWithForm.prototype), "setEventsListeners", this).call(this);
-      this._popup.addEventListener('submit', function (evt) {
-        evt.preventDefault();
-        _this3._saveInputsValues();
-        _this3._handleSubmitForm(_this3._inputValues);
-      });
+    key: "renderLoading",
+    value: function renderLoading(isLoading) {
+      var loadingText = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 'Сохранение...';
+      if (isLoading) {
+        this._buttonSave.textContent = loadingText;
+      } else {
+        this._buttonSave.textContent = this._buttonSaveLoading;
+      }
     }
   }, {
     key: "close",
     value: function close() {
-      this._formElement.reset();
       PopupWithForm_get(PopupWithForm_getPrototypeOf(PopupWithForm.prototype), "close", this).call(this);
+      this._popupForm.reset();
+    }
+  }, {
+    key: "setEventListeners",
+    value: function setEventListeners() {
+      var _this3 = this;
+      PopupWithForm_get(PopupWithForm_getPrototypeOf(PopupWithForm.prototype), "setEventListeners", this).call(this);
+      this._popupForm.addEventListener("submit", function (evt) {
+        evt.preventDefault();
+        _this3._submitForm(_this3._getInputValues());
+      });
     }
   }]);
   return PopupWithForm;
+}(Popup);
+;// CONCATENATED MODULE: ./src/components/PopupWithSubmit.js
+function PopupWithSubmit_typeof(obj) { "@babel/helpers - typeof"; return PopupWithSubmit_typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, PopupWithSubmit_typeof(obj); }
+function PopupWithSubmit_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+function PopupWithSubmit_defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, PopupWithSubmit_toPropertyKey(descriptor.key), descriptor); } }
+function PopupWithSubmit_createClass(Constructor, protoProps, staticProps) { if (protoProps) PopupWithSubmit_defineProperties(Constructor.prototype, protoProps); if (staticProps) PopupWithSubmit_defineProperties(Constructor, staticProps); Object.defineProperty(Constructor, "prototype", { writable: false }); return Constructor; }
+function PopupWithSubmit_toPropertyKey(arg) { var key = PopupWithSubmit_toPrimitive(arg, "string"); return PopupWithSubmit_typeof(key) === "symbol" ? key : String(key); }
+function PopupWithSubmit_toPrimitive(input, hint) { if (PopupWithSubmit_typeof(input) !== "object" || input === null) return input; var prim = input[Symbol.toPrimitive]; if (prim !== undefined) { var res = prim.call(input, hint || "default"); if (PopupWithSubmit_typeof(res) !== "object") return res; throw new TypeError("@@toPrimitive must return a primitive value."); } return (hint === "string" ? String : Number)(input); }
+function PopupWithSubmit_get() { if (typeof Reflect !== "undefined" && Reflect.get) { PopupWithSubmit_get = Reflect.get.bind(); } else { PopupWithSubmit_get = function _get(target, property, receiver) { var base = PopupWithSubmit_superPropBase(target, property); if (!base) return; var desc = Object.getOwnPropertyDescriptor(base, property); if (desc.get) { return desc.get.call(arguments.length < 3 ? target : receiver); } return desc.value; }; } return PopupWithSubmit_get.apply(this, arguments); }
+function PopupWithSubmit_superPropBase(object, property) { while (!Object.prototype.hasOwnProperty.call(object, property)) { object = PopupWithSubmit_getPrototypeOf(object); if (object === null) break; } return object; }
+function PopupWithSubmit_inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); Object.defineProperty(subClass, "prototype", { writable: false }); if (superClass) PopupWithSubmit_setPrototypeOf(subClass, superClass); }
+function PopupWithSubmit_setPrototypeOf(o, p) { PopupWithSubmit_setPrototypeOf = Object.setPrototypeOf ? Object.setPrototypeOf.bind() : function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return PopupWithSubmit_setPrototypeOf(o, p); }
+function PopupWithSubmit_createSuper(Derived) { var hasNativeReflectConstruct = PopupWithSubmit_isNativeReflectConstruct(); return function _createSuperInternal() { var Super = PopupWithSubmit_getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = PopupWithSubmit_getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return PopupWithSubmit_possibleConstructorReturn(this, result); }; }
+function PopupWithSubmit_possibleConstructorReturn(self, call) { if (call && (PopupWithSubmit_typeof(call) === "object" || typeof call === "function")) { return call; } else if (call !== void 0) { throw new TypeError("Derived constructors may only return object or undefined"); } return PopupWithSubmit_assertThisInitialized(self); }
+function PopupWithSubmit_assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+function PopupWithSubmit_isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
+function PopupWithSubmit_getPrototypeOf(o) { PopupWithSubmit_getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf.bind() : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return PopupWithSubmit_getPrototypeOf(o); }
+
+var PopupWithSubmit = /*#__PURE__*/function (_Popup) {
+  PopupWithSubmit_inherits(PopupWithSubmit, _Popup);
+  var _super = PopupWithSubmit_createSuper(PopupWithSubmit);
+  function PopupWithSubmit(popup) {
+    var _this;
+    PopupWithSubmit_classCallCheck(this, PopupWithSubmit);
+    _this = _super.call(this, popup);
+    _this._popupForm = _this._popup.querySelector(".popup__form");
+    return _this;
+  }
+  PopupWithSubmit_createClass(PopupWithSubmit, [{
+    key: "letSubmit",
+    value: function letSubmit(handleDelete) {
+      this.submitForm = handleDelete;
+    }
+  }, {
+    key: "setEventListeners",
+    value: function setEventListeners() {
+      var _this2 = this;
+      PopupWithSubmit_get(PopupWithSubmit_getPrototypeOf(PopupWithSubmit.prototype), "setEventListeners", this).call(this);
+      this._popupForm.addEventListener("submit", function (evt) {
+        evt.preventDefault();
+        _this2.submitForm(_this2);
+      });
+    }
+  }]);
+  return PopupWithSubmit;
 }(Popup);
 ;// CONCATENATED MODULE: ./src/components/Section.js
 function Section_typeof(obj) { "@babel/helpers - typeof"; return Section_typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, Section_typeof(obj); }
@@ -327,25 +401,30 @@ function Section_toPropertyKey(arg) { var key = Section_toPrimitive(arg, "string
 function Section_toPrimitive(input, hint) { if (Section_typeof(input) !== "object" || input === null) return input; var prim = input[Symbol.toPrimitive]; if (prim !== undefined) { var res = prim.call(input, hint || "default"); if (Section_typeof(res) !== "object") return res; throw new TypeError("@@toPrimitive must return a primitive value."); } return (hint === "string" ? String : Number)(input); }
 var Section = /*#__PURE__*/function () {
   function Section(_ref, containerSelector) {
-    var item = _ref.item,
+    var items = _ref.items,
       renderer = _ref.renderer;
     Section_classCallCheck(this, Section);
-    this._items = item;
+    this._items = items;
+    this._container = document.querySelector(containerSelector);
     this._renderer = renderer;
-    this._containerEl = document.querySelector(containerSelector);
   }
   Section_createClass(Section, [{
     key: "renderItems",
-    value: function renderItems() {
+    value: function renderItems(items) {
       var _this = this;
-      this._items.forEach(function (item) {
+      items.forEach(function (item) {
         _this._renderer(item);
       });
     }
   }, {
-    key: "addCard",
-    value: function addCard(element) {
-      this._containerEl.prepend(element);
+    key: "addItemPrep",
+    value: function addItemPrep(element) {
+      this._container.prepend(element);
+    }
+  }, {
+    key: "addItem",
+    value: function addItem(element) {
+      this._container.append(element);
     }
   }]);
   return Section;
@@ -358,52 +437,165 @@ function UserInfo_createClass(Constructor, protoProps, staticProps) { if (protoP
 function UserInfo_toPropertyKey(arg) { var key = UserInfo_toPrimitive(arg, "string"); return UserInfo_typeof(key) === "symbol" ? key : String(key); }
 function UserInfo_toPrimitive(input, hint) { if (UserInfo_typeof(input) !== "object" || input === null) return input; var prim = input[Symbol.toPrimitive]; if (prim !== undefined) { var res = prim.call(input, hint || "default"); if (UserInfo_typeof(res) !== "object") return res; throw new TypeError("@@toPrimitive must return a primitive value."); } return (hint === "string" ? String : Number)(input); }
 var UserInfo = /*#__PURE__*/function () {
-  function UserInfo(name, job) {
+  function UserInfo(_ref) {
+    var name = _ref.name,
+      job = _ref.job,
+      avatar = _ref.avatar;
     UserInfo_classCallCheck(this, UserInfo);
-    this._userName = document.querySelector(name);
-    this._userJob = document.querySelector(job);
+    this._name = document.querySelector(name);
+    this.job = document.querySelector(job);
+    this._avatar = document.querySelector(avatar);
   }
   UserInfo_createClass(UserInfo, [{
     key: "getUserInfo",
     value: function getUserInfo() {
       return {
-        name: this._userName.textContent,
-        job: this._userJob.textContent
+        name: this._name.textContent,
+        job: this.job.textContent
       };
     }
   }, {
-    key: "setUserInfo",
-    value: function setUserInfo(data) {
-      this._userName.textContent = data.name;
-      this._userJob.textContent = data.job;
+    key: "letUserInfo",
+    value: function letUserInfo(name, job) {
+      this._name.textContent = name;
+      this.job.textContent = job;
+    }
+  }, {
+    key: "letUserAvatar",
+    value: function letUserAvatar(avatar) {
+      this._avatar.src = avatar;
     }
   }]);
   return UserInfo;
 }();
+;// CONCATENATED MODULE: ./src/components/Api.js
+function Api_typeof(obj) { "@babel/helpers - typeof"; return Api_typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, Api_typeof(obj); }
+function Api_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+function Api_defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, Api_toPropertyKey(descriptor.key), descriptor); } }
+function Api_createClass(Constructor, protoProps, staticProps) { if (protoProps) Api_defineProperties(Constructor.prototype, protoProps); if (staticProps) Api_defineProperties(Constructor, staticProps); Object.defineProperty(Constructor, "prototype", { writable: false }); return Constructor; }
+function Api_toPropertyKey(arg) { var key = Api_toPrimitive(arg, "string"); return Api_typeof(key) === "symbol" ? key : String(key); }
+function Api_toPrimitive(input, hint) { if (Api_typeof(input) !== "object" || input === null) return input; var prim = input[Symbol.toPrimitive]; if (prim !== undefined) { var res = prim.call(input, hint || "default"); if (Api_typeof(res) !== "object") return res; throw new TypeError("@@toPrimitive must return a primitive value."); } return (hint === "string" ? String : Number)(input); }
+var Api = /*#__PURE__*/function () {
+  function Api(_ref) {
+    var url = _ref.url,
+      headers = _ref.headers;
+    Api_classCallCheck(this, Api);
+    this._url = url;
+    this._headers = headers;
+    this.__checkResponse = function (res) {
+      if (res.ok) {
+        return res.json();
+      }
+      return Promise.reject("\u041E\u0448\u0438\u0431\u043A\u0430: ".concat(res.status));
+    };
+  }
+  Api_createClass(Api, [{
+    key: "getUsersApi",
+    value: function getUsersApi() {
+      return fetch(this._url + "/users/me", {
+        method: "GET",
+        headers: this._headers
+      }).then(this.__checkResponse);
+    }
+  }, {
+    key: "getInitialCards",
+    value: function getInitialCards() {
+      return fetch(this._url + "/cards", {
+        method: 'GET',
+        headers: this._headers
+      }).then(this.__checkResponse);
+    }
+  }, {
+    key: "infoNewUser",
+    value: function infoNewUser(name, about) {
+      return fetch(this._url + '/users/me', {
+        method: 'PATCH',
+        headers: this._headers,
+        body: JSON.stringify({
+          name: name,
+          about: about
+        })
+      }).then(this.__checkResponse);
+    }
+  }, {
+    key: "avatarNewUser",
+    value: function avatarNewUser(avatar) {
+      return fetch(this._url + '/users/me/avatar', {
+        method: 'PATCH',
+        headers: this._headers,
+        body: JSON.stringify({
+          avatar: avatar
+        })
+      }).then(this.__checkResponse);
+    }
+  }, {
+    key: "newCard",
+    value: function newCard(name, link) {
+      return fetch(this._url + '/cards', {
+        method: 'POST',
+        headers: this._headers,
+        body: JSON.stringify({
+          name: name,
+          link: link
+        })
+      }).then(this.__checkResponse);
+    }
+  }, {
+    key: "removeCard",
+    value: function removeCard(cardId) {
+      return fetch(this._url + '/cards/' + cardId, {
+        method: 'DELETE',
+        headers: this._headers
+      }).then(this.__checkResponse);
+    }
+  }, {
+    key: "likeCard",
+    value: function likeCard(cardId) {
+      return fetch(this._url + '/cards/' + cardId + '/likes', {
+        method: 'PUT',
+        headers: this._headers
+      }).then(this.__checkResponse);
+    }
+  }, {
+    key: "deleteLike",
+    value: function deleteLike(cardId) {
+      return fetch(this._url + '/cards/' + cardId + '/likes', {
+        method: 'DELETE',
+        headers: this._headers
+      }).then(this.__checkResponse);
+    }
+  }]);
+  return Api;
+}();
 ;// CONCATENATED MODULE: ./src/utils/constants.js
+var popupAddCard = document.querySelector(".popup_type_add"),
+  popupProfile = document.querySelector(".popup_type_edit"),
+  formProfile = document.querySelector(".popup__form_edit"),
+  nameInput = formProfile.querySelector("#popup__type_name"),
+  jobInput = formProfile.querySelector("#popup__type_job"),
+  profile = document.querySelector(".profile"),
+  openAddCardPopup = profile.querySelector(".profile__add-button"),
+  openEditProfilePopup = profile.querySelector(".profile__edit-button"),
+  popupConfirmRemove = document.querySelector('.popup_type_confirm'),
+  popupImage = document.querySelector(".popup_image"),
+  popupAvatar = document.querySelector('.popup_type_avatar'),
+  openPopupAvatar = document.querySelector('.profile__image-button'),
+  formNewCard = document.querySelector(".popup__form_add"),
+  formAvatar = document.querySelector(".popup__form_avatar");
 var configValidation = {
-  formSelector: ".popup__form",
   inputSelector: ".popup__input",
   submitButtonSelector: ".popup__button",
   disabledButtonClass: "popup__button_disabled",
   inputErrorClass: "popup__input_error",
   errorClass: "popup__error_visible"
 };
-var profileButton = document.querySelector('.profile__edit-button'),
-  nameInput = document.querySelector('#popup__type_name'),
-  jobInput = document.querySelector('#popup__type_job'),
-  popupEditForm = document.querySelector('.popup__form_edit'),
-  buttonAddCard = document.querySelector('.profile__add-button'),
-  popupAddCard = document.querySelector('.popup_type_add'),
-  addCardForm = popupAddCard.querySelector('.popup__form_add');
-var massElements = '.elements',
-  cardElement = '.element',
-  popupImg = '.popup_image',
-  popupAdd = '.popup_type_add',
-  popupEdit = '.popup_type_edit',
-  userName = '.profile__name',
-  job = '.profile__job';
 ;// CONCATENATED MODULE: ./src/pages/index.js
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+function _iterableToArrayLimit(arr, i) { var _i = null == arr ? null : "undefined" != typeof Symbol && arr[Symbol.iterator] || arr["@@iterator"]; if (null != _i) { var _s, _e, _x, _r, _arr = [], _n = !0, _d = !1; try { if (_x = (_i = _i.call(arr)).next, 0 === i) { if (Object(_i) !== _i) return; _n = !1; } else for (; !(_n = (_s = _x.call(_i)).done) && (_arr.push(_s.value), _arr.length !== i); _n = !0) { ; } } catch (err) { _d = !0, _e = err; } finally { try { if (!_n && null != _i.return && (_r = _i.return(), Object(_r) !== _r)) return; } finally { if (_d) throw _e; } } return _arr; } }
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 
@@ -413,52 +605,136 @@ var massElements = '.elements',
 
 
 
-var userInfo = new UserInfo(userName, job);
-var imageZoomPopup = new PopupWithImage(popupImg);
-var profileEditForm = new PopupWithForm(popupEdit, editFormSubmitData);
-var cardPopup = new PopupWithForm(popupAdd, pages_addCardForm);
-var popupFormValidation = new FormValidator(configValidation, popupEditForm);
-var cardFormValidation = new FormValidator(configValidation, addCardForm);
-var cardSection = new Section({
-  item: initialCards,
-  renderer: renderCard
-}, massElements);
-function renderCard(data) {
-  cardSection.addCard(createCard(data));
+
+
+var userId;
+var popupProfileForm = new PopupWithForm(popupProfile, submitPopupProfile);
+var popupWithImage = new PopupWithImage(popupImage);
+var popupCard = new PopupWithForm(popupAddCard, submitPopupCard);
+var popupConfirm = new PopupWithSubmit(popupConfirmRemove);
+var popupAvatarForm = new PopupWithForm(popupAvatar, submitPopupAvatar);
+var configValidator = new FormValidator(configValidation, formProfile);
+var cardValidator = new FormValidator(configValidation, formNewCard);
+var avatarValidator = new FormValidator(configValidation, formAvatar);
+var api = new Api({
+  url: 'https://nomoreparties.co/v1/cohort-58',
+  headers: {
+    authorization: '2e4da387-210d-4156-b421-ffadc6c7daf6',
+    'Content-Type': 'application/json'
+  }
+});
+Promise.all([api.getUsersApi(), api.getInitialCards()]).then(function (_ref) {
+  var _ref2 = _slicedToArray(_ref, 2),
+    user = _ref2[0],
+    cards = _ref2[1];
+  userId = user._id;
+  userInfo.letUserInfo(user.name, user.about);
+  userInfo.letUserAvatar(user.avatar);
+  cardList.renderItems(cards);
+}).catch(function (err) {
+  console.log(err);
+});
+var userInfo = new UserInfo({
+  name: ".profile__name",
+  job: ".profile__job",
+  avatar: ".profile__image"
+});
+function submitPopupAvatar(value) {
+  popupAvatarForm.renderLoading(true);
+  api.avatarNewUser(value.avatar).then(function (user) {
+    userInfo.letUserAvatar(user.avatar);
+    popupAvatarForm.close();
+  }).catch(function (err) {
+    console.log(err);
+  }).finally(function () {
+    popupAvatarForm.renderLoading(false);
+  });
 }
-var createCard = function createCard(data) {
-  return new Card(data, cardElement, handleClickCard).generateCard();
-};
-function profileEditFormOpen() {
-  var data = userInfo.getUserInfo();
-  nameInput.value = data.name;
-  jobInput.value = data.job;
-  popupFormValidation.resetValidation();
-  profileEditForm.open();
+function submitPopupProfile(value) {
+  popupProfileForm.renderLoading(true);
+  api.infoNewUser(value.name, value.job).then(function (user) {
+    userInfo.letUserInfo(user.name, user.about);
+    popupProfileForm.close();
+  }).catch(function (err) {
+    console.log(err);
+  }).finally(function () {
+    popupProfileForm.renderLoading(false);
+  });
 }
-function editFormSubmitData(formData) {
-  userInfo.setUserInfo(formData);
-  profileEditForm.close();
+function createCard(item) {
+  var card = new Card({
+    config: item,
+    userId: userId,
+    handleCardClick: function handleCardClick(name, link) {
+      popupWithImage.open(link, name);
+    },
+    handleDeleteClick: function handleDeleteClick(cardId) {
+      popupConfirm.open();
+      popupConfirm.letSubmit(function () {
+        api.removeCard(cardId).then(function () {
+          card.handleDeleteCard();
+          popupConfirm.close();
+        }).catch(function (err) {
+          console.log(err);
+        });
+      });
+    },
+    handleLikeClick: function handleLikeClick(cardId) {
+      api.likeCard(cardId).then(function (evt) {
+        card.handleLikeCard(evt);
+      }).catch(function (err) {
+        console.log(err);
+      });
+    },
+    handleLikeDelete: function handleLikeDelete(cardId) {
+      api.deleteLike(cardId).then(function (evt) {
+        card.handleLikeCard(evt);
+      }).catch(function (err) {
+        console.log(err);
+      });
+    }
+  }, ".element");
+  var cardItem = card.makingCard();
+  return cardItem;
 }
-function cardFormOpen() {
-  cardFormValidation.resetValidation();
-  cardPopup.open();
+function submitPopupCard(config) {
+  popupCard.renderLoading(true);
+  api.newCard(config.place, config.link).then(function (e) {
+    cardList.addItemPrep(createCard(e));
+    popupCard.close();
+  }).catch(function (err) {
+    console.log(err);
+  }).finally(function () {
+    popupCard.renderLoading(false);
+  });
 }
-function pages_addCardForm(data) {
-  renderCard(data);
-  cardPopup.close();
-}
-var handleClickCard = function handleClickCard(link, name) {
-  return imageZoomPopup.open(link, name);
-};
-popupFormValidation.enableValidation();
-cardFormValidation.enableValidation();
-profileEditForm.setEventsListeners();
-cardSection.renderItems();
-cardPopup.setEventsListeners();
-imageZoomPopup.setEventsListeners();
-buttonAddCard.addEventListener('click', cardFormOpen);
-profileButton.addEventListener('click', profileEditFormOpen);
-
+openPopupAvatar.addEventListener("click", function () {
+  popupAvatarForm.open();
+  avatarValidator.resetValidation();
+});
+openEditProfilePopup.addEventListener("click", function () {
+  popupProfileForm.open();
+  var input = userInfo.getUserInfo();
+  nameInput.value = input.name;
+  jobInput.value = input.job;
+  configValidator.resetValidation();
+});
+openAddCardPopup.addEventListener("click", function () {
+  popupCard.open();
+  cardValidator.resetValidation();
+});
+var cardList = new Section({
+  renderer: function renderer(item) {
+    cardList.addItem(createCard(item));
+  }
+}, ".elements");
+cardValidator.enableValidation();
+configValidator.enableValidation();
+avatarValidator.enableValidation();
+popupWithImage.setEventListeners();
+popupCard.setEventListeners();
+popupProfileForm.setEventListeners();
+popupConfirm.setEventListeners();
+popupAvatarForm.setEventListeners();
 /******/ })()
 ;
