@@ -46,7 +46,7 @@ const userInfo = new UserInfo({
 });
 
 function submitPopupAvatar(value) {
-  popupAvatarForm.ButtonLoading(true)
+  popupAvatarForm.renderLoading(true)
   api.avatarNewUser(value.avatar)
     .then(user => {
       userInfo.letUserAvatar(user.avatar);
@@ -56,12 +56,12 @@ function submitPopupAvatar(value) {
       console.log(err);
     })
     .finally(() => {
-      popupAvatarForm.ButtonLoading(false)
+      popupAvatarForm.renderLoading(false)
     });
 }
 
 function submitPopupProfile(value) {
-  popupProfileForm.ButtonLoading(true)
+  popupProfileForm.renderLoading(true)
   api.infoNewUser(value.name, value.job)
     .then(user => {
       userInfo.letUserInfo(user.name, user.about);
@@ -71,7 +71,7 @@ function submitPopupProfile(value) {
       console.log(err);
     })
     .finally(() => {
-      popupProfileForm.ButtonLoading(false)
+      popupProfileForm.renderLoading(false)
     });
 }
 
@@ -119,24 +119,23 @@ function createCard(item) {
 }
 
 function submitPopupCard(config) {
-  popupCard.ButtonLoading(true)
+  popupCard.renderLoading(true)
   api.newCard(config.place, config.link)
     .then((e) => {
-      cardList.addItem(createCard(e));
+      cardList.addItemPrep(createCard(e));
       popupCard.close();
     })
     .catch((err) => {
       console.log(err);
     })
     .finally(() => {
-      popupCard.ButtonLoading(false)
+      popupCard.renderLoading(false)
     });
 }
 
 constants.openPopupAvatar.addEventListener("click", () => {
   popupAvatarForm.open();
   avatarValidator.resetValidation();
-  avatarValidator._toggleButtonState();
 });
 
 constants.openEditProfilePopup.addEventListener("click", () => {
@@ -150,7 +149,6 @@ constants.openEditProfilePopup.addEventListener("click", () => {
 constants.openAddCardPopup.addEventListener("click", () => {
   popupCard.open()
   cardValidator.resetValidation();
-  cardValidator._toggleButtonState();
 });
 
 const cardList = new Section(

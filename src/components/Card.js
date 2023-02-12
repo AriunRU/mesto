@@ -68,7 +68,7 @@ export class Card {
   _setEventListeners() {
     this._heartButton.addEventListener("click", () => {
       if (this._heartButton.classList.contains("element__heart_active")) {
-        this._handleLikeDeleteClick(this._cardId)
+        this._handleLikeDelete(this._cardId)
       } else {
         this._handleLikeClick(this._cardId)
       }
